@@ -7,6 +7,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/vigneshwaran-48/echo-safe/internal/handlers"
+	m "github.com/vigneshwaran-48/echo-safe/internal/middleware"
 	"github.com/vigneshwaran-48/echo-safe/internal/repository"
 	"github.com/vigneshwaran-48/echo-safe/internal/service"
 )
@@ -19,9 +20,16 @@ func SetupRouter(db *sql.DB, r chi.Router) http.Handler {
 	notesService := service.CreateNoteService(notesRespository)
 	notesHandler := handlers.CreateNotesHandler(notesService)
 
-	r.Route("/notes", func(r chi.Router) {
-		r.Post("/", notesHandler.CreateNoteHandler)
-		r.Get("/", notesHandler.ListNotesHandler)
+	r.Group(func(r chi.Router) {
+		r.Use(
+			middleware.Logger,
+			m.CSPMiddleware,
+		)
+		r.Get("/", handlers.HomeHandler)
+		r.Route("/notes", func(r chi.Router) {
+			r.Post("/", notesHandler.CreateNoteHandler)
+			r.Get("/", notesHandler.ListNotesHandler)
+		})
 	})
 
 	return r
