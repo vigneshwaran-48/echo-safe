@@ -1,7 +1,20 @@
 package main
 
-import "log"
+import (
+	"log"
+	"net/http"
+
+	"github.com/go-chi/chi/v5"
+	"github.com/vigneshwaran-48/echo-safe/api"
+	"github.com/vigneshwaran-48/echo-safe/internal/db"
+)
 
 func main() {
-	log.Println("Started")
+	db := db.CreateDB()
+	router := chi.NewRouter()
+
+	api.SetupRouter(db, router)
+
+	log.Println("Server started on port 8089")
+	log.Fatal(http.ListenAndServe(":8089", router))
 }
