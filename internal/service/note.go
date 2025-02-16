@@ -25,6 +25,6 @@ func (service *NoteService) CreateNote(title string, content string) (*models.No
 	return note, nil
 }
 
-func (service *NoteService) List() ([]*models.Note, error) {
+func (service *NoteService) List() ([]models.Note, error) {
 	return service.repository.FindAll()
 }

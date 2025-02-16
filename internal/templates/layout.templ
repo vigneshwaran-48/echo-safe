@@ -2,7 +2,10 @@ package templates
 
 import "github.com/vigneshwaran-48/echo-safe/internal/middleware"
 
-templ header(title string) {
+import "github.com/vigneshwaran-48/echo-safe/internal/templates/sidebar"
+import "github.com/vigneshwaran-48/echo-safe/internal/models"
+
+templ head(title string) {
 	<head>
 		<title>{ title }</title>
 		<meta charset="UTF-8"/>
@@ -13,9 +16,19 @@ templ header(title string) {
 	</head>
 }
 
-templ Layout(content templ.Component, title string) {
-	@header(title)
-	<body class="p-2">
-		@content
+templ header() {
+	<header class="p-2 h-[40px]"></header>
+}
+
+templ Layout(content templ.Component, title string, notes []models.Note) {
+	@head(title)
+	<body class="w-full h-full flex bg-light text-secondary-text">
+		@sidebar.Sidebar(notes)
+		<div class="w-4/5 flex flex-col space-between">
+			@header()
+			<div class="w-full h-[calc(100%-40px)]">
+				@content
+			</div>
+		</div>
 	</body>
 }

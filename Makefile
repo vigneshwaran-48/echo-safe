@@ -14,7 +14,7 @@ test:
 
 .PHONY: tailwind-watch
 tailwind-watch:
-	./tailwindcss -i ./static/css/input.css -o ./static/css/style.css --watch
+	./tailwindcss -i ./static/css/input.css -o ./static/css/style.min.css --watch
 
 .PHONY: tailwind-build
 tailwind-build:
@@ -22,7 +22,7 @@ tailwind-build:
 
 .PHONY: templ-watch
 templ-watch:
-	templ generate --watch
+	templ generate --watch 
 
 .PHONY: templ-generate
 templ-generate:

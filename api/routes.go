@@ -19,13 +19,14 @@ func SetupRouter(db *sql.DB, r chi.Router) http.Handler {
 	notesRespository := repository.CreateNoteRepository(db)
 	notesService := service.CreateNoteService(notesRespository)
 	notesHandler := handlers.CreateNotesHandler(notesService)
+	homeHanlder := handlers.CreateHomeHandler(notesService)
 
 	r.Group(func(r chi.Router) {
 		r.Use(
 			middleware.Logger,
 			m.CSPMiddleware,
 		)
-		r.Get("/", handlers.HomeHandler)
+		r.Get("/", homeHanlder.Home)
 		r.Route("/notes", func(r chi.Router) {
 			r.Post("/", notesHandler.CreateNoteHandler)
 			r.Get("/", notesHandler.ListNotesHandler)
