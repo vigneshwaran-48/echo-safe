@@ -1,13 +1,21 @@
 package sidebar
 
 import (
+	"fmt"
 	"github.com/vigneshwaran-48/echo-safe/internal/models"
 	"github.com/vigneshwaran-48/echo-safe/internal/templates/icons/note"
 )
 
 templ sidebarNote(note models.Note) {
-	<li class="p-2 hover:bg-dark-hover hover:text-primary-text transition rounded cursor-pointer">
-		<p>{ note.Title }</p>
+	<li class="nav-link p-2 hover:bg-dark-hover hover:text-primary-text transition rounded cursor-pointer">
+		<a
+			hx-get={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }
+			hx-push-url="true"
+			hx-target="#main-content"
+			_="on click remove .bg-dark-hover .text-primary-text from .nav-link then add .bg-dark-hover .text-primary-text to me"
+		>
+			<p>{ note.Title }</p>
+		</a>
 	</li>
 }
 

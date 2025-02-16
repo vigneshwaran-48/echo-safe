@@ -1,1 +1,1 @@
-<div class=\"bg-primary bg-green-400 p-4\">Welcome to Echo Safe</div>
+<div id=\"main-content\" class=\"bg-primary bg-green-400 p-4\"></div>
