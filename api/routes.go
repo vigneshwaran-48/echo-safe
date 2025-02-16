@@ -30,6 +30,7 @@ func SetupRouter(db *sql.DB, r chi.Router) http.Handler {
 		r.Route("/notes", func(r chi.Router) {
 			r.Post("/", notesHandler.CreateNoteHandler)
 			r.Get("/", notesHandler.ListNotesHandler)
+			r.Get("/{id}", notesHandler.GetNote)
 		})
 	})
 

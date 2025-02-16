@@ -1,0 +1,10 @@
+package pages
+
+import "github.com/vigneshwaran-48/echo-safe/internal/models"
+
+templ NotePage(note *models.Note) {
+	<div>
+		<h2>{ note.Title }</h2>
+		<p>{ note.Content }</p>
+	</div>
+}

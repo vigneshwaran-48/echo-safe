@@ -27,7 +27,9 @@ templ Layout(content templ.Component, title string, notes []models.Note) {
 		<div class="w-4/5 flex flex-col space-between">
 			@header()
 			<div class="w-full h-[calc(100%-40px)]">
-				@content
+				<div id="main-content">
+					@content
+				</div>
 			</div>
 		</div>
 	</body>
