@@ -22,7 +22,7 @@ tailwind-build:
 
 .PHONY: templ-watch
 templ-watch:
-	templ generate --watch
+	templ generate --watch 
 
 .PHONY: templ-generate
 templ-generate:
