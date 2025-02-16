@@ -3,10 +3,8 @@
 \"></script><script src=\"/static/script/response-targets.js\" nonce=\"
 \"></script><link rel=\"stylesheet\" href=\"/static/css/style.min.css\" nonce=\"
 \"></head>
-<header class=\"p-2\"></header>
-<nav class=\"w-1/5 h-full bg-dark min-w-[200px]\"><div class=\"p-2\">
-</div></nav>
-<body class=\"w-full h-full flex bg-light\">
+<header class=\"p-2 h-[40px]\"></header>
+<body class=\"w-full h-full flex bg-light text-secondary-text\">
 <div class=\"w-4/5 flex flex-col space-between\">
 <div class=\"w-full h-[calc(100%-40px)]\">
 </div></div></body>

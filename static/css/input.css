@@ -4,4 +4,7 @@
   --color-primary: var(--color-blue-500);
   --color-dark: #1A1A1A;
   --color-light: #202020;
+  --color-secondary-text: #999999;
+  --color-primary-text: #e9ecef;
+  --color-dark-hover: #262626;
 }

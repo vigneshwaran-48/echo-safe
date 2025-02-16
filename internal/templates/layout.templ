@@ -1,7 +1,9 @@
 package templates
 
 import "github.com/vigneshwaran-48/echo-safe/internal/middleware"
-import "github.com/vigneshwaran-48/echo-safe/internal/templates/icons/note"
+
+import "github.com/vigneshwaran-48/echo-safe/internal/templates/sidebar"
+import "github.com/vigneshwaran-48/echo-safe/internal/models"
 
 templ head(title string) {
 	<head>
@@ -15,21 +17,13 @@ templ head(title string) {
 }
 
 templ header() {
-	<header class="p-2"></header>
+	<header class="p-2 h-[40px]"></header>
 }
 
-templ sidebar() {
-	<nav class="w-1/5 h-full bg-dark min-w-[200px]">
-		<div class="p-2">
-			@note.NoteIcon()
-		</div>
-	</nav>
-}
-
-templ Layout(content templ.Component, title string) {
+templ Layout(content templ.Component, title string, notes []models.Note) {
 	@head(title)
-	<body class="w-full h-full flex bg-light">
-		@sidebar()
+	<body class="w-full h-full flex bg-light text-secondary-text">
+		@sidebar.Sidebar(notes)
 		<div class="w-4/5 flex flex-col space-between">
 			@header()
 			<div class="w-full h-[calc(100%-40px)]">

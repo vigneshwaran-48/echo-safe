@@ -48,7 +48,7 @@ func (repository *NoteRepository) Delete(id int64) error {
 	return err
 }
 
-func (repository *NoteRepository) FindAll() ([]*models.Note, error) {
+func (repository *NoteRepository) FindAll() ([]models.Note, error) {
 	query := `SELECT id, title, content FROM note`
 	rows, err := repository.db.Query(query)
 	if err != nil {
@@ -56,9 +56,9 @@ func (repository *NoteRepository) FindAll() ([]*models.Note, error) {
 	}
 	defer rows.Close()
 
-	var notes []*models.Note
+	var notes []models.Note
 	for rows.Next() {
-		note := &models.Note{}
+		note := models.Note{}
 		err := rows.Scan(&note.Id, &note.Title, &note.Content)
 		if err != nil {
 			return nil, err
