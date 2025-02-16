@@ -15,6 +15,9 @@ func main() {
 
 	api.SetupRouter(db, router)
 
+	fileServer := http.FileServer(http.Dir("./static"))
+	router.Handle("/static/*", http.StripPrefix("/static/", fileServer))
+
 	log.Println("Server started on port 8089")
 	log.Fatal(http.ListenAndServe(":8089", router))
 }
