@@ -2,4 +2,6 @@
 
 @theme {
   --color-primary: var(--color-blue-500);
+  --color-dark: #1A1A1A;
+  --color-light: #202020;
 }

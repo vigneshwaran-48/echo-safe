@@ -1,8 +1,9 @@
 package templates
 
 import "github.com/vigneshwaran-48/echo-safe/internal/middleware"
+import "github.com/vigneshwaran-48/echo-safe/internal/templates/icons/note"
 
-templ header(title string) {
+templ head(title string) {
 	<head>
 		<title>{ title }</title>
 		<meta charset="UTF-8"/>
@@ -13,9 +14,27 @@ templ header(title string) {
 	</head>
 }
 
+templ header() {
+	<header class="p-2"></header>
+}
+
+templ sidebar() {
+	<nav class="w-1/5 h-full bg-dark min-w-[200px]">
+		<div class="p-2">
+			@note.NoteIcon()
+		</div>
+	</nav>
+}
+
 templ Layout(content templ.Component, title string) {
-	@header(title)
-	<body class="w-full h-full">
-		@content
+	@head(title)
+	<body class="w-full h-full flex bg-light">
+		@sidebar()
+		<div class="w-4/5 flex flex-col space-between">
+			@header()
+			<div class="w-full h-[calc(100%-40px)]">
+				@content
+			</div>
+		</div>
 	</body>
 }
