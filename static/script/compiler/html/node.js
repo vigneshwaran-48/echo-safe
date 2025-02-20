@@ -87,11 +87,31 @@ class InlineCodeNode extends ASTNode {
 }
 
 class TextNode extends ASTNode {
-  constructor(text) {
+  constructor(text, inParagraph) {
     super();
     this.text = text;
+    this.inParagraph = inParagraph;
   }
   accept(visitor) {
     return visitor.visitText(this);
+  }
+}
+
+class ParagraphStartNode extends ASTNode {
+  constructor() {
+    super();
+  }
+  accept(visitor) {
+    return visitor.visitParagraphStart();
+  }
+}
+
+class ParagraphContentNode extends ASTNode {
+  constructor(children) {
+    super();
+    this.children = children;
+  }
+  accept(visitor) {
+    return visitor.visitParagraphContent(this);
   }
 }

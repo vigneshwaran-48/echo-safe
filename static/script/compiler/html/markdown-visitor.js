@@ -1,4 +1,4 @@
-class MarkdownVisitor {
+class MarkdownToHTML {
   visitDocument(node) {
     return node.children.map(child => child.accept(this)).join('');
   }
@@ -24,7 +24,21 @@ class MarkdownVisitor {
     return `<code>${node.text}</code>`;
   }
   visitText(node) {
-    return `<p>${node.text}</p>`;
+    if (node.inParagraph) {
+      return node.text;
+    } else {
+      return `<p>${node.text}</p>`;
+    }
+  }
+  visitParagraphStart() {
+    return `<p>`;
+  }
+  visitParagraphContent(node) {
+    let content = ``;
+    node.children.forEach(child => {
+      content += child.accept(this);
+    })
+    content += `</p>` // Will this work in all cases?
+    return content;
   }
 }
-
