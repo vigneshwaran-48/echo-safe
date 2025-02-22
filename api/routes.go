@@ -31,6 +31,7 @@ func SetupRouter(db *sql.DB, r chi.Router) http.Handler {
 			r.Post("/", notesHandler.CreateNoteHandler)
 			r.Get("/", notesHandler.ListNotesHandler)
 			r.Get("/{id}", notesHandler.GetNote)
+			r.Patch("/{id}", notesHandler.UpdateNote)
 		})
 	})
 

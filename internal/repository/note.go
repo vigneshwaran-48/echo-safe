@@ -38,7 +38,7 @@ func (repository *NoteRepository) Update(note *models.Note) error {
         SET title = ?, content = ? 
         WHERE id = ?`
 
-	_, err := repository.db.Exec(query, note.Title, note.Content)
+	_, err := repository.db.Exec(query, note.Title, note.Content, note.Id)
 	return err
 }
 
