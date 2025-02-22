@@ -5,4 +5,11 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("sidebar").classList.toggle("w-0");
     document.getElementById("sidebar").classList.toggle("w-[200px]");
   });
+
+  Array.from(document.getElementsByClassName("editor")).forEach(element => {
+    element.addEventListener("keyup", e => {
+      const mdToHTMLContent = marked.parse(e.target.value);
+      document.getElementById(e.target.dataset.preview).innerHTML = DOMPurify.sanitize(mdToHTMLContent);
+    })
+  });
 });

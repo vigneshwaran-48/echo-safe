@@ -6,12 +6,15 @@ import "fmt"
 templ NotePage(note *models.Note) {
 	<div class="p-2 flex justify-center w-full h-full overflow-y-scroll">
 		<textarea
-			class="outline-none max-w-[700px] w-full resize-none"
+			class="editor outline-none max-w-[700px] w-full resize-none"
 			name="content"
 			hx-patch={ fmt.Sprintf("/notes/%d", note.Id) }
 			hx-trigger="keyup changed delay:500ms"
+			data-preview={ fmt.Sprintf("note-preview-%d", note.Id) }
 		>
 			{ note.Content }
 		</textarea>
+		// Handling for multiple note editors like split view
+		<div id={ fmt.Sprintf("note-preview-%d", note.Id) } class="hidden max-w-[700px] w-full"></div>
 	</div>
 }

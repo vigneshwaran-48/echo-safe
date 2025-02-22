@@ -1,3 +1,5 @@
-<div class=\"p-2 flex justify-center w-full h-full overflow-y-scroll\"><textarea class=\"outline-none max-w-[700px] w-full resize-none\" name=\"content\" hx-patch=\"
-\" hx-trigger=\"keyup changed delay:500ms\">
-</textarea></div>
+<div class=\"p-2 flex justify-center w-full h-full overflow-y-scroll\"><textarea class=\"editor outline-none max-w-[700px] w-full resize-none\" name=\"content\" hx-patch=\"
+\" hx-trigger=\"keyup changed delay:500ms\" data-preview=\"
+\">
+</textarea><div id=\"
+\" class=\"hidden max-w-[700px] w-full\"></div></div>
