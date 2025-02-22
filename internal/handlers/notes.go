@@ -66,3 +66,18 @@ func (handler *NotesHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 	}
 	err = templates.Layout(pages.NotePage(note), note.Title, notes).Render(r.Context(), w)
 }
+
+func (handler *NotesHandler) UpdateNote(w http.ResponseWriter, r *http.Request) {
+	noteId, err := strconv.Atoi(chi.URLParam(r, "id"))
+	if err != nil {
+		http.Error(w, "Id should be a number", http.StatusBadRequest)
+		return
+	}
+	content := r.FormValue("content")
+	err = handler.service.UpdateNote(int64(noteId), "", content)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Write([]byte("Saved!"))
+}

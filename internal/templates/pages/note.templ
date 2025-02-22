@@ -1,9 +1,17 @@
 package pages
 
 import "github.com/vigneshwaran-48/echo-safe/internal/models"
+import "fmt"
 
 templ NotePage(note *models.Note) {
 	<div class="p-2 flex justify-center w-full h-full overflow-y-scroll">
-		<div contentEditable="true" class="outline-none max-w-[500px] w-full">{ note.Content }</div>
+		<textarea
+			class="outline-none max-w-[700px] w-full resize-none"
+			name="content"
+			hx-patch={ fmt.Sprintf("/notes/%d", note.Id) }
+			hx-trigger="keyup changed delay:500ms"
+		>
+			{ note.Content }
+		</textarea>
 	</div>
 }

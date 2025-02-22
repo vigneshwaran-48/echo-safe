@@ -32,3 +32,17 @@ func (service *NoteService) List() ([]models.Note, error) {
 func (service *NoteService) GetById(id int64) (*models.Note, error) {
 	return service.repository.FindById(id)
 }
+
+func (service *NoteService) UpdateNote(id int64, title string, content string) error {
+	note, err := service.GetById(id)
+	if err != nil {
+		return err
+	}
+	if title != "" {
+		note.Title = title
+	}
+	if content != "" {
+		note.Content = content
+	}
+	return service.repository.Update(note)
+}
