@@ -12,6 +12,8 @@ templ head(title string) {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<script src="/static/script/htmx.min.js" nonce={ middleware.GetHtmxNonce(ctx) }></script>
 		<script src="/static/script/response-targets.js" nonce={ middleware.GetResponseTargetsNonce(ctx) }></script>
+		<script src="/static/script/marked.min.js" nonce={ middleware.GetResponseTargetsNonce(ctx) }></script>
+		<script src="/static/script/purify.min.js" nonce={ middleware.GetResponseTargetsNonce(ctx) }></script>
 		<link rel="stylesheet" href="/static/css/style.min.css" nonce={ middleware.GetTwNonce(ctx) }/>
 	</head>
 }
@@ -21,10 +23,11 @@ templ header() {
 }
 
 templ Layout(content templ.Component, title string, notes []models.Note) {
+
 	@head(title)
 	<body class="w-full h-full flex bg-light text-secondary-text">
 		@sidebar.Sidebar(notes)
-		<div class="w-4/5 flex flex-col space-between">
+		<div class="w-[calc(100%-200px)] flex flex-col space-between">
 			@header()
 			<div class="w-full h-[calc(100%-40px)]">
 				<div id="main-content">

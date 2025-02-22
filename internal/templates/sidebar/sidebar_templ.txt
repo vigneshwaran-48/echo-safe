@@ -1,6 +1,6 @@
 <li class=\"nav-link p-2 hover:bg-dark-hover hover:text-primary-text transition rounded cursor-pointer\"><a hx-get=\"
 \" hx-push-url=\"true\" hx-target=\"#main-content\" _=\"on click remove .bg-dark-hover .text-primary-text from .nav-link then add .bg-dark-hover .text-primary-text to me\"><p>
 </p></a></li>
-<nav class=\"w-1/5 h-full bg-dark min-w-[200px] flex flex-col space-between\"><div class=\"p-2\">
+<nav class=\"h-full bg-dark w-[200px] flex flex-col space-between\"><div class=\"p-2\">
 </div><div class=\"w-full h-[calc(100%-90px)] border-t border-b border-gray-700\"><ul class=\"p-2\">
 </ul></div><div class=\"w-full\"></div></nav>
