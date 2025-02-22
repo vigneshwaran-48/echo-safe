@@ -33,10 +33,10 @@ func (service *NoteService) GetById(id int64) (*models.Note, error) {
 	return service.repository.FindById(id)
 }
 
-func (service *NoteService) UpdateNote(id int64, title string, content string) error {
+func (service *NoteService) UpdateNote(id int64, title string, content string) (*models.Note, error) {
 	note, err := service.GetById(id)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	if title != "" {
 		note.Title = title
@@ -44,5 +44,9 @@ func (service *NoteService) UpdateNote(id int64, title string, content string) e
 	if content != "" {
 		note.Content = content
 	}
-	return service.repository.Update(note)
+	err = service.repository.Update(note)
+	if err != nil {
+		return nil, err
+	}
+	return note, nil
 }

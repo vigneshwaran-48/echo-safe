@@ -6,6 +6,24 @@ const handleSidebarChange = id => {
   document.querySelector(`#note-sidenav-${id}`).classList.add("text-primary-text", "bg-dark-hover");
 }
 
+const getPosition = (e) => {
+  let posx = 0;
+  let posy = 0;
+  if (e.pageX || e.pageY) {
+    posx = e.pageX;
+    posy = e.pageY;
+  } else if (e.clientX || e.clientY) {
+    posx = e.clientX + document.body.scrollLeft +
+      document.documentElement.scrollLeft;
+    posy = e.clientY + document.body.scrollTop +
+      document.documentElement.scrollTop;
+  }
+  return {
+    x: posx,
+    y: posy
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
   document.getElementById("sidebar-toggle").addEventListener("click", function() {
     document.getElementById("sidebar").classList.toggle("w-0");
@@ -53,5 +71,22 @@ document.addEventListener("DOMContentLoaded", function() {
     handleSidebarChange(e.detail.id);
     history.pushState(null, "", `/notes/${e.detail.id}`);
     document.title = e.detail.title;
+  })
+
+  document.querySelectorAll(".nav-link").forEach(navLink => {
+    navLink.addEventListener("contextmenu", e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const menu = document.querySelector("#sidebar-context-menu");
+      const pos = getPosition(e);
+      menu.style.left = `${pos.x}px`;
+      menu.style.top = `${pos.y}px`;
+      menu.classList.add("scale-100");
+    });
+  });
+
+  // Outside click listeners
+  document.body.addEventListener("click", () => {
+    document.querySelector("#sidebar-context-menu").classList.remove("scale-100");
   })
 });
