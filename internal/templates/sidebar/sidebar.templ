@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/vigneshwaran-48/echo-safe/internal/models"
 	"github.com/vigneshwaran-48/echo-safe/internal/templates/icons/note"
+	"github.com/vigneshwaran-48/echo-safe/internal/templates/icons/sidebar"
 )
 
 templ sidebarNote(note models.Note) {
@@ -19,12 +20,22 @@ templ sidebarNote(note models.Note) {
 	</li>
 }
 
+templ topbarIcons(icon templ.Component, id string) {
+	<span id={ id } class="px-2">
+		@icon
+	</span>
+}
+
+templ SideTopbar() {
+	<div class="flex items-center">
+		@topbarIcons(sidebar.SidebarIcon("w-[20px] text-white"), "sidebar-toggle")
+		@topbarIcons(note.NoteIcon(), "")
+	</div>
+}
+
 templ Sidebar(notes []models.Note) {
-	<nav class="w-1/5 h-full bg-dark min-w-[200px] flex flex-col space-between">
-		<div class="p-2">
-			@note.NoteIcon()
-		</div>
-		<div class="w-full h-[calc(100%-90px)] border-t border-b border-gray-700">
+	<nav id="sidebar" class="h-full bg-dark w-[200px] flex flex-col space-between transition-all overflow-hidden duration-100">
+		<div class="w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700">
 			<ul class="p-2">
 				for _, note := range notes {
 					@sidebarNote(note)

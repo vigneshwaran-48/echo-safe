@@ -1,3 +1,2 @@
-<div><h2>
-</h2><p>
-</p></div>
+<div class=\"p-2 flex justify-center w-full h-full overflow-y-scroll\"><div contentEditable=\"true\" class=\"outline-none max-w-[500px] w-full\">
+</div></div>
