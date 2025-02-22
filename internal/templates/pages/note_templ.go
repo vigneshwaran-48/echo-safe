@@ -143,7 +143,7 @@ func NotePage(note *models.Note) templ.Component {
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(note.Title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/note.templ`, Line: 32, Col: 80}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/note.templ`, Line: 31, Col: 80}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 		if templ_7745c5c3_Err != nil {

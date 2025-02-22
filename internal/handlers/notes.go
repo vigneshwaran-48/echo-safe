@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -31,6 +32,7 @@ func (handler *NotesHandler) CreateNoteHandler(w http.ResponseWriter, r *http.Re
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	w.Header().Add("HX-Trigger-After-Swap", fmt.Sprintf("{\"oncreatenote\": {\"id\": %d, \"title\": \"%s\"}}", note.Id, note.Title))
 	err = notesidebar.NoteWithSidebar(note).Render(r.Context(), w)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -60,6 +62,7 @@ func (handler *NotesHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 	}
 	if IsHxRequest(r) {
 		// HTMX request hence partial render the page.
+		w.Header().Add("HX-Trigger", fmt.Sprintf("{\"onactivenote\": {\"id\": %d, \"title\": \"%s\"}}", note.Id, note.Title))
 		err = pages.NotePage(note).Render(r.Context(), w)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -73,7 +76,7 @@ func (handler *NotesHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = templates.Layout(pages.NotePage(note), note.Title, notes).Render(r.Context(), w)
+	err = templates.Layout(pages.NotePage(note), note.Title, notes, note.Id).Render(r.Context(), w)
 }
 
 func (handler *NotesHandler) UpdateNote(w http.ResponseWriter, r *http.Request) {

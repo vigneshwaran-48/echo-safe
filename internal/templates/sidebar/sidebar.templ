@@ -7,15 +7,27 @@ import (
 	"github.com/vigneshwaran-48/echo-safe/internal/templates/icons/sidebar"
 )
 
-templ SidebarNote(note *models.Note) {
-	<li class="nav-link p-2 hover:bg-dark-hover hover:text-primary-text transition rounded cursor-pointer">
+templ SidebarNote(note *models.Note, activeNote int64) {
+	{{ className := "nav-link p-2 hover:bg-dark-hover hover:text-primary-text transition rounded cursor-pointer" }}
+	{{
+	if activeNote == note.Id {
+		className = fmt.Sprintf("%s text-primary-text bg-dark-hover", className)
+	}
+	}}
+	<li
+		id={ fmt.Sprintf("note-sidenav-%d", note.Id) }
+		class={ className }
+	>
 		<a
 			hx-get={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }
 			hx-push-url="true"
 			hx-target="#main-content"
-			_="on click remove .bg-dark-hover .text-primary-text from .nav-link then add .bg-dark-hover .text-primary-text to me"
 		>
-			<p>{ note.Title }</p>
+			if len(note.Title) > 15 {
+				<p>{ fmt.Sprintf("%s...", string(note.Title[0:15])) }</p>
+			} else {
+				<p>{ note.Title }</p>
+			}
 		</a>
 	</li>
 }
@@ -41,12 +53,12 @@ templ SideTopbar() {
 	</div>
 }
 
-templ Sidebar(notes []models.Note) {
-	<nav id="sidebar" class="h-full bg-dark w-[200px] flex flex-col space-between transition-all overflow-hidden duration-100">
+templ Sidebar(notes []models.Note, activeNote int64) {
+	<nav id="sidebar" class="h-full bg-dark w-[250px] flex flex-col space-between transition-all overflow-hidden duration-100">
 		<div class="w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700">
 			<ul id="notes-sidebar" class="p-2">
 				for _, note := range notes {
-					@SidebarNote(&note)
+					@SidebarNote(&note, activeNote)
 				}
 			</ul>
 		</div>

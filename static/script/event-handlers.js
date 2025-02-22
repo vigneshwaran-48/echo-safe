@@ -1,9 +1,15 @@
 
+const handleSidebarChange = id => {
+  document.querySelectorAll(".nav-link").forEach(navLink => {
+    navLink.classList.remove("text-primary-text", "bg-dark-hover");
+  });
+  document.querySelector(`#note-sidenav-${id}`).classList.add("text-primary-text", "bg-dark-hover");
+}
 
 document.addEventListener("DOMContentLoaded", function() {
   document.getElementById("sidebar-toggle").addEventListener("click", function() {
     document.getElementById("sidebar").classList.toggle("w-0");
-    document.getElementById("sidebar").classList.toggle("w-[200px]");
+    document.getElementById("sidebar").classList.toggle("w-[250px]");
   });
 
   document.querySelectorAll("editor > .note-content-input").forEach(element => {
@@ -37,4 +43,15 @@ document.addEventListener("DOMContentLoaded", function() {
       document.getElementById(activeEditor.dataset.preview).classList.toggle("hidden");
     }
   });
+
+  document.body.addEventListener("onactivenote", e => {
+    handleSidebarChange(e.detail.id);
+    document.title = e.detail.title;
+  })
+
+  document.body.addEventListener("oncreatenote", e => {
+    handleSidebarChange(e.detail.id);
+    history.pushState(null, "", `/notes/${e.detail.id}`);
+    document.title = e.detail.title;
+  })
 });
