@@ -16,10 +16,10 @@ document.addEventListener("DOMContentLoaded", function() {
   document.addEventListener("keyup", e => {
     if (e.altKey && e.key === "p") {
       e.preventDefault()
-      console.log("Show Preview")
       const activeEditor = document.querySelector(".editor.active"); // Handling for multiple editor window with .active class
       if (!activeEditor) {
         console.log("No active editor exists");
+        return;
       }
       activeEditor.classList.toggle("hidden");
       document.getElementById(activeEditor.dataset.preview).classList.toggle("hidden");
