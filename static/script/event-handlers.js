@@ -21,6 +21,11 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("No active editor exists");
         return;
       }
+
+      // Parsing here for cases where the note content id not edited.
+      const mdToHTMLContent = marked.parse(activeEditor.value);
+      document.getElementById(activeEditor.dataset.preview).innerHTML = DOMPurify.sanitize(mdToHTMLContent);
+
       activeEditor.classList.toggle("hidden");
       document.getElementById(activeEditor.dataset.preview).classList.toggle("hidden");
     }
