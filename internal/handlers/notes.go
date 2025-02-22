@@ -7,9 +7,11 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/vigneshwaran-48/echo-safe/internal/models"
 	"github.com/vigneshwaran-48/echo-safe/internal/service"
 	"github.com/vigneshwaran-48/echo-safe/internal/templates"
 	notesidebar "github.com/vigneshwaran-48/echo-safe/internal/templates/oob/note-sidebar"
+	updatenote "github.com/vigneshwaran-48/echo-safe/internal/templates/oob/update-note"
 	"github.com/vigneshwaran-48/echo-safe/internal/templates/pages"
 )
 
@@ -92,5 +94,9 @@ func (handler *NotesHandler) UpdateNote(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	w.Write([]byte("Saved!"))
+	err = updatenote.UpdateNote(&models.Note{Id: int64(noteId), Title: title, Content: content}).Render(r.Context(), w)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }

@@ -1,0 +1,26 @@
+package updatenote
+
+import (
+	"fmt"
+	"github.com/vigneshwaran-48/echo-safe/internal/models"
+)
+
+templ UpdateNote(note *models.Note) {
+	<li
+		id={ fmt.Sprintf("note-sidenav-%d", note.Id) }
+		class="nav-link p-2 hover:bg-dark-hover hover:text-primary-text transition rounded cursor-pointer text-primary-text bg-dark-hover"
+		hx-swap-oob="true"
+	>
+		<a
+			hx-get={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }
+			hx-push-url="true"
+			hx-target="#main-content"
+		>
+			if len(note.Title) > 15 {
+				<p>{ fmt.Sprintf("%s...", string(note.Title[0:15])) }</p>
+			} else {
+				<p>{ note.Title }</p>
+			}
+		</a>
+	</li>
+}
