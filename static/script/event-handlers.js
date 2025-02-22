@@ -6,10 +6,16 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("sidebar").classList.toggle("w-[200px]");
   });
 
-  Array.from(document.getElementsByClassName("editor")).forEach(element => {
+  document.querySelectorAll("editor > .note-content-input").forEach(element => {
     element.addEventListener("keyup", e => {
       const mdToHTMLContent = marked.parse(e.target.value);
-      document.getElementById(e.target.dataset.preview).innerHTML = DOMPurify.sanitize(mdToHTMLContent);
+      document.querySelector(`#${e.target.dataset.preview} > .content`).innerHTML = DOMPurify.sanitize(mdToHTMLContent);
+    })
+  });
+
+  document.querySelectorAll(".note-title-input").forEach(element => {
+    element.addEventListener("keyup", e => {
+      document.querySelector(`#${e.target.dataset.preview} > .note-title`).innerText = e.target.value;
     })
   });
 
@@ -23,11 +29,12 @@ document.addEventListener("DOMContentLoaded", function() {
       }
 
       // Parsing here for cases where the note content id not edited.
-      const mdToHTMLContent = marked.parse(activeEditor.value);
-      document.getElementById(activeEditor.dataset.preview).innerHTML = DOMPurify.sanitize(mdToHTMLContent);
+      const activeEditorContent = document.querySelector(".editor.active > .note-content-input");
+      const mdToHTMLContent = marked.parse(activeEditorContent.value);
+      document.querySelector(`#${activeEditorContent.dataset.preview} > .content`).innerHTML = DOMPurify.sanitize(mdToHTMLContent);
 
       activeEditor.classList.toggle("hidden");
       document.getElementById(activeEditor.dataset.preview).classList.toggle("hidden");
     }
-  })
+  });
 });

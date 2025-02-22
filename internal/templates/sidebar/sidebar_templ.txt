@@ -4,7 +4,8 @@
 <span id=\"
 \" class=\"px-2\">
 </span>
-<div class=\"flex items-center\">
-</div>
-<nav id=\"sidebar\" class=\"h-full bg-dark w-[200px] flex flex-col space-between transition-all overflow-hidden duration-100\"><div class=\"w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700\"><ul class=\"p-2\">
+<div class=\"flex items-center\"><span class=\"px-2 cursor-pointer\" id=\"sidebar-toggle\">
+</span> <span class=\"px-2 cursor-pointer\" hx-post=\"/notes\" hx-target=\"#main-content\">
+</span></div>
+<nav id=\"sidebar\" class=\"h-full bg-dark w-[200px] flex flex-col space-between transition-all overflow-hidden duration-100\"><div class=\"w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700\"><ul id=\"notes-sidebar\" class=\"p-2\">
 </ul></div><div class=\"w-full\"></div></nav>

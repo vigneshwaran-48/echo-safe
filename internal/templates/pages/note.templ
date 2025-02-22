@@ -5,16 +5,32 @@ import "fmt"
 
 templ NotePage(note *models.Note) {
 	<div class="p-2 flex justify-center w-full h-full overflow-y-scroll">
-		<textarea
-			class="editor active outline-none max-w-[700px] w-full resize-none"
-			name="content"
-			hx-patch={ fmt.Sprintf("/notes/%d", note.Id) }
-			hx-trigger="keyup changed delay:500ms"
+		<div
+			class="editor active w-full max-w-[700px] h-full flex flex-col"
 			data-preview={ fmt.Sprintf("note-preview-%d", note.Id) }
 		>
-			{ note.Content }
-		</textarea>
-		// Handling for multiple note editors like split view
-		<div id={ fmt.Sprintf("note-preview-%d", note.Id) } class="preview hidden max-w-[700px] w-full"></div>
+			<input
+				name="title"
+				class="note-title-input outline-none py-2"
+				value={ note.Title }
+				hx-patch={ fmt.Sprintf("/notes/%d", note.Id) }
+				hx-trigger="keyup changed delay:500ms"
+				data-preview={ fmt.Sprintf("note-preview-%d", note.Id) }
+			/>
+			<textarea
+				class="note-content-input outline-none w-full resize-none h-[calc(100%-40px)]"
+				name="content"
+				hx-patch={ fmt.Sprintf("/notes/%d", note.Id) }
+				hx-trigger="keyup changed delay:500ms"
+				data-preview={ fmt.Sprintf("note-preview-%d", note.Id) }
+			>
+				{ note.Content }
+			</textarea>
+		</div>
+		<div id={ fmt.Sprintf("note-preview-%d", note.Id) } class="preview hidden w-full max-w-[700px] h-full flex flex-col">
+			// Handling for multiple note editors like split view
+			<div class="note-title py-2 text-4xl font-bold w-full break-all">{ note.Title }</div>
+			<div class="content w-full"></div>
+		</div>
 	</div>
 }
