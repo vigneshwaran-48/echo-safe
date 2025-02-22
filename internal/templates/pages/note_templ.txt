@@ -1,2 +1,2 @@
-<div class=\"p-2 flex justify-center\"><div contentEditable=\"true\" class=\"outline-none max-w-[500px]\">
+<div class=\"p-2 flex justify-center w-full h-full overflow-y-scroll\"><div contentEditable=\"true\" class=\"outline-none max-w-[500px] w-full\">
 </div></div>
