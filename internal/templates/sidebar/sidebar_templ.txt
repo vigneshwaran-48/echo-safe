@@ -1,11 +1,17 @@
-<li class=\"nav-link p-2 hover:bg-dark-hover hover:text-primary-text transition rounded cursor-pointer\"><a hx-get=\"
-\" hx-push-url=\"true\" hx-target=\"#main-content\" _=\"on click remove .bg-dark-hover .text-primary-text from .nav-link then add .bg-dark-hover .text-primary-text to me\"><p>
-</p></a></li>
+<li id=\"
+\" class=\"
+\"><a hx-get=\"
+\" hx-push-url=\"true\" hx-target=\"#main-content\">
+<p>
+</p>
+<p>
+</p>
+</a></li>
 <span id=\"
 \" class=\"px-2\">
 </span>
 <div class=\"flex items-center\"><span class=\"px-2 cursor-pointer\" id=\"sidebar-toggle\">
 </span> <span class=\"px-2 cursor-pointer\" hx-post=\"/notes\" hx-target=\"#main-content\">
 </span></div>
-<nav id=\"sidebar\" class=\"h-full bg-dark w-[200px] flex flex-col space-between transition-all overflow-hidden duration-100\"><div class=\"w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700\"><ul id=\"notes-sidebar\" class=\"p-2\">
+<nav id=\"sidebar\" class=\"h-full bg-dark w-[250px] flex flex-col space-between transition-all overflow-hidden duration-100\"><div class=\"w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700\"><ul id=\"notes-sidebar\" class=\"p-2\">
 </ul></div><div class=\"w-full\"></div></nav>

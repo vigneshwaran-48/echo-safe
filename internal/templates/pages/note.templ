@@ -28,7 +28,6 @@ templ NotePage(note *models.Note) {
 			</textarea>
 		</div>
 		<div id={ fmt.Sprintf("note-preview-%d", note.Id) } class="preview hidden w-full max-w-[700px] h-full flex flex-col">
-			// Handling for multiple note editors like split view
 			<div class="note-title py-2 text-4xl font-bold w-full break-all">{ note.Title }</div>
 			<div class="content w-full"></div>
 		</div>

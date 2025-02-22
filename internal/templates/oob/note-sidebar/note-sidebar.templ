@@ -7,6 +7,6 @@ import "github.com/vigneshwaran-48/echo-safe/internal/templates/sidebar"
 templ NoteWithSidebar(note *models.Note) {
 	@pages.NotePage(note)
 	<ul id="notes-sidebar" hx-swap-oob="beforeend">
-		@sidebar.SidebarNote(note)
+		@sidebar.SidebarNote(note, note.Id)
 	</ul>
 }

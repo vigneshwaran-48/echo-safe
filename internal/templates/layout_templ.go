@@ -170,7 +170,7 @@ func header() templ.Component {
 	})
 }
 
-func Layout(content templ.Component, title string, notes []models.Note) templ.Component {
+func Layout(content templ.Component, title string, notes []models.Note, activeNote int64) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -207,7 +207,7 @@ func Layout(content templ.Component, title string, notes []models.Note) templ.Co
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = sidebar.Sidebar(notes).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = sidebar.Sidebar(notes, activeNote).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
