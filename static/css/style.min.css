@@ -521,6 +521,9 @@
   .collapse {
     visibility: collapse;
   }
+  .fixed {
+    position: fixed;
+  }
   .relative {
     position: relative;
   }
@@ -532,6 +535,9 @@
   }
   .z-1 {
     z-index: 1;
+  }
+  .z-6 {
+    z-index: 6;
   }
   .m-6 {
     margin: calc(var(--spacing) * 6);
@@ -582,6 +588,9 @@
   .h-\[calc\(100\%-60px\)\] {
     height: calc(100% - 60px);
   }
+  .h-fit {
+    height: fit-content;
+  }
   .h-full {
     height: 100%;
   }
@@ -606,6 +615,9 @@
   .w-\[250px\] {
     width: 250px;
   }
+  .w-fit {
+    width: fit-content;
+  }
   .w-full {
     width: 100%;
   }
@@ -617,6 +629,27 @@
   }
   .border-collapse {
     border-collapse: collapse;
+  }
+  .origin-top-left {
+    transform-origin: top left;
+  }
+  .scale-0 {
+    --tw-scale-x: 0%;
+    --tw-scale-y: 0%;
+    --tw-scale-z: 0%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+  .scale-1 {
+    --tw-scale-x: 1%;
+    --tw-scale-y: 1%;
+    --tw-scale-z: 1%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
+  .scale-100 {
+    --tw-scale-x: 100%;
+    --tw-scale-y: 100%;
+    --tw-scale-z: 100%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
   }
   .transform {
     transform: var(--tw-rotate-x) var(--tw-rotate-y) var(--tw-rotate-z) var(--tw-skew-x) var(--tw-skew-y);
@@ -694,6 +727,9 @@
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
   }
+  .py-1 {
+    padding-block: calc(var(--spacing) * 1);
+  }
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
   }
@@ -705,6 +741,9 @@
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
   }
+  .text-\[14px\] {
+    font-size: 14px;
+  }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
@@ -714,6 +753,9 @@
   }
   .text-primary-text {
     color: var(--color-primary-text);
+  }
+  .text-red-500 {
+    color: var(--color-red-500);
   }
   .text-secondary-text {
     color: var(--color-secondary-text);
@@ -771,6 +813,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-dark-hover);
+      }
+    }
+  }
+  .hover\:bg-light {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-light);
       }
     }
   }
@@ -930,6 +979,21 @@
     transform: none;
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
+}
+@property --tw-scale-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
+}
+@property --tw-scale-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 1;
 }
 @property --tw-rotate-x {
   syntax: "*";

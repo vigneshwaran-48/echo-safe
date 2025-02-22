@@ -1,0 +1,8 @@
+<li id=\"
+\" class=\"nav-link p-2 hover:bg-dark-hover hover:text-primary-text transition rounded cursor-pointer text-primary-text bg-dark-hover\" hx-swap-oob=\"true\"><a hx-get=\"
+\" hx-push-url=\"true\" hx-target=\"#main-content\">
+<p>
+</p>
+<p>
+</p>
+</a></li>
