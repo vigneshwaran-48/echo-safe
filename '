@@ -7,7 +7,7 @@ import (
 	"github.com/vigneshwaran-48/echo-safe/internal/templates/icons/sidebar"
 )
 
-templ SidebarNote(note *models.Note) {
+templ sidebarNote(note models.Note) {
 	<li class="nav-link p-2 hover:bg-dark-hover hover:text-primary-text transition rounded cursor-pointer">
 		<a
 			hx-get={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }
@@ -28,15 +28,9 @@ templ topbarIcons(icon templ.Component, id string) {
 
 templ SideTopbar() {
 	<div class="flex items-center">
-		<span class="px-2 cursor-pointer" id="sidebar-toggle">
-			@sidebar.SidebarIcon("w-[20px] text-white")
-		</span>
-		<span
-			class="px-2 cursor-pointer"
-			hx-post="/notes"
-			hx-target="#main-content"
-		>
-			@note.NoteIcon()
+		@topbarIcons(sidebar.SidebarIcon("w-[20px] text-white"), "sidebar-toggle")
+		<span>
+			@topbarIcons(note.NoteIcon(), "create-note")
 		</span>
 	</div>
 }
@@ -44,9 +38,9 @@ templ SideTopbar() {
 templ Sidebar(notes []models.Note) {
 	<nav id="sidebar" class="h-full bg-dark w-[200px] flex flex-col space-between transition-all overflow-hidden duration-100">
 		<div class="w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700">
-			<ul id="notes-sidebar" class="p-2">
+			<ul class="p-2">
 				for _, note := range notes {
-					@SidebarNote(&note)
+					@sidebarNote(note)
 				}
 			</ul>
 		</div>

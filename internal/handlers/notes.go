@@ -8,6 +8,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/vigneshwaran-48/echo-safe/internal/service"
 	"github.com/vigneshwaran-48/echo-safe/internal/templates"
+	notesidebar "github.com/vigneshwaran-48/echo-safe/internal/templates/oob/note-sidebar"
 	"github.com/vigneshwaran-48/echo-safe/internal/templates/pages"
 )
 
@@ -22,11 +23,19 @@ func CreateNotesHandler(service *service.NoteService) *NotesHandler {
 func (handler *NotesHandler) CreateNoteHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.FormValue("title")
 	content := r.FormValue("content")
-	if _, err := handler.service.CreateNote(title, content); err != nil {
+	if title == "" {
+		title = "Untitled"
+	}
+	note, err := handler.service.CreateNote(title, content)
+	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	w.Write([]byte("Note saved successfully!"))
+	err = notesidebar.NoteWithSidebar(note).Render(r.Context(), w)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func (handler *NotesHandler) ListNotesHandler(w http.ResponseWriter, r *http.Request) {
@@ -73,8 +82,9 @@ func (handler *NotesHandler) UpdateNote(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, "Id should be a number", http.StatusBadRequest)
 		return
 	}
+	title := r.FormValue("title")
 	content := r.FormValue("content")
-	err = handler.service.UpdateNote(int64(noteId), "", content)
+	err = handler.service.UpdateNote(int64(noteId), title, content)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
