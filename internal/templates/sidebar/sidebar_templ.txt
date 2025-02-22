@@ -15,5 +15,5 @@
 <div class=\"flex items-center\"><span class=\"px-2 cursor-pointer\" id=\"sidebar-toggle\">
 </span> <span class=\"px-2 cursor-pointer\" hx-post=\"/notes\" hx-target=\"#main-content\">
 </span></div>
-<nav id=\"sidebar\" class=\"h-full bg-dark w-[250px] flex flex-col space-between transition-all overflow-hidden duration-100\"><div class=\"w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700\"><ul id=\"notes-sidebar\" class=\"p-2\">
+<nav id=\"sidebar\" class=\"h-full bg-dark w-[250px] flex flex-col space-between transition-all overflow-hidden duration-100\"><div class=\"w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700\"><ul id=\"notes-sidebar\" class=\"p-2 h-full overflow-y-scroll\">
 </ul></div><div class=\"w-full\"></div></nav>
