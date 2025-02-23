@@ -101,3 +101,20 @@ func (handler *NotesHandler) UpdateNote(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 }
+
+func (handler *NotesHandler) DeleteNote(w http.ResponseWriter, r *http.Request) {
+	noteId, err := strconv.Atoi(chi.URLParam(r, "id"))
+	if err != nil {
+		http.Error(w, "Id should be a number", http.StatusBadRequest)
+		return
+	}
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	err = handler.service.DeleteNote(int64(noteId))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}

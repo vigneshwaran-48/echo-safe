@@ -82,8 +82,13 @@ document.addEventListener("DOMContentLoaded", function() {
       menu.style.left = `${pos.x}px`;
       menu.style.top = `${pos.y}px`;
       menu.classList.add("scale-100");
+      document.querySelector("#note-context-menu-delete").dataset.id = navLink.dataset.id;
     });
   });
+
+  document.querySelector("#note-context-menu-delete").addEventListener("click", e => {
+    document.querySelector(`#note-sidenav-${e.target.dataset.id} > .delete`).click();
+  })
 
   // Outside click listeners
   document.body.addEventListener("click", () => {

@@ -1,0 +1,10 @@
+package deletenote
+
+import "github.com/vigneshwaran-48/echo-safe/internal/models"
+import "github.com/vigneshwaran-48/echo-safe/internal/templates/sidebar"
+
+templ DeletedNote(note *models.Note) {
+	<ul id="notes-sidebar" hx-swap-oob="delete">
+		@sidebar.SidebarNote(note, note.Id)
+	</ul>
+}

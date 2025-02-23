@@ -1,19 +1,20 @@
-<ul id=\"sidebar-context-menu\" class=\"fixed p-2 bg-dark h-fit text-[14px] rounded w-[200px] scale-0 transition-all origin-top-left\"><li class=\"px-2 py-1 cursor-pointer hover:bg-light rounded\">Bookmark</li><li class=\"px-2 py-1 cursor-pointer hover:bg-light rounded text-red-500\">Delete</li></ul>
+<ul id=\"sidebar-context-menu\" class=\"fixed p-2 bg-dark h-fit text-[14px] rounded w-[200px] scale-0 transition-all origin-top-left\"><li class=\"px-2 py-1 cursor-pointer hover:bg-light rounded\">Bookmark</li><li id=\"note-context-menu-delete\" class=\"delete px-2 py-1 cursor-pointer hover:bg-light rounded text-red-500\">Delete</li></ul>
 <li id=\"
 \" class=\"
 \" data-id=\"
-\"><a hx-get=\"
-\" hx-push-url=\"true\" hx-target=\"#main-content\">
+\" hx-swap=\"outerHTML swap:1s\" hx-target=\"closest li\"><a hx-get=\"
+\" hx-push-url=\"true\" hx-target=\"#main-content\" hx-swap=\"innerHTML\">
 <p>
 </p>
 <p>
 </p>
-</a></li>
+</a><div class=\"delete hidden\" hx-delete=\"
+\"></div></li>
 <span id=\"
 \" class=\"px-2\">
 </span>
 <div class=\"flex items-center\"><span class=\"px-2 cursor-pointer\" id=\"sidebar-toggle\">
 </span> <span class=\"px-2 cursor-pointer\" hx-post=\"/notes\" hx-target=\"#main-content\">
 </span></div>
-<nav id=\"sidebar\" class=\"h-full bg-dark w-[250px] flex flex-col space-between transition-all overflow-hidden duration-100\"><div class=\"w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700\"><ul id=\"notes-sidebar\" class=\"p-2\">
+<nav id=\"sidebar\" class=\"h-full bg-dark w-[250px] flex flex-col space-between transition-all overflow-hidden duration-100\"><div class=\"w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700\"><ul id=\"notes-sidebar\" class=\"p-2 h-full overflow-y-scroll\">
 </ul></div><div class=\"w-full\"></div></nav>
