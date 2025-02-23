@@ -1,8 +1,10 @@
 <li id=\"
-\" class=\"nav-link p-2 hover:bg-dark-hover hover:text-primary-text transition rounded cursor-pointer text-primary-text bg-dark-hover\" hx-swap-oob=\"true\"><a hx-get=\"
-\" hx-push-url=\"true\" hx-target=\"#main-content\">
+\" class=\"nav-link text-primary-text bg-dark-hover p-2 hover:bg-dark-hover hover:text-primary-text transition rounded cursor-pointer\" data-id=\"
+\" hx-swap=\"outerHTML swap:1s\" hx-target=\"closest li\" hx-swap-oob=\"true\"><a hx-get=\"
+\" hx-push-url=\"true\" hx-target=\"#main-content\" hx-swap=\"innerHTML\">
 <p>
 </p>
 <p>
 </p>
-</a></li>
+</a><div class=\"delete hidden\" hx-delete=\"
+\"></div></li>
