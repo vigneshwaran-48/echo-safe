@@ -82,6 +82,10 @@ document.addEventListener("DOMContentLoaded", function() {
       menu.style.left = `${pos.x}px`;
       menu.style.top = `${pos.y}px`;
       menu.classList.add("scale-100");
+
+      const deleteButton = menu.querySelector(".delete");
+      deleteButton.setAttribute("hx-delete", `/notes/${navLink.dataset.id}`);
+      console.log(deleteButton);
     });
   });
 

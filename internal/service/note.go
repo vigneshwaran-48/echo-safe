@@ -50,3 +50,15 @@ func (service *NoteService) UpdateNote(id int64, title string, content string) (
 	}
 	return note, nil
 }
+
+func (service *NoteService) DeleteNote(id int64) error {
+	_, err := service.GetById(id)
+	if err != nil {
+		return err
+	}
+	err = service.repository.Delete(id)
+	if err != nil {
+		return err
+	}
+	return nil
+}

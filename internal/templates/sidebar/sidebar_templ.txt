@@ -1,4 +1,4 @@
-<ul id=\"sidebar-context-menu\" class=\"fixed p-2 bg-dark h-fit text-[14px] rounded w-[200px] scale-0 transition-all origin-top-left\"><li class=\"px-2 py-1 cursor-pointer hover:bg-light rounded\">Bookmark</li><li class=\"px-2 py-1 cursor-pointer hover:bg-light rounded text-red-500\">Delete</li></ul>
+<ul id=\"sidebar-context-menu\" class=\"fixed p-2 bg-dark h-fit text-[14px] rounded w-[200px] scale-0 transition-all origin-top-left\"><li class=\"px-2 py-1 cursor-pointer hover:bg-light rounded\">Bookmark</li><li class=\"delete px-2 py-1 cursor-pointer hover:bg-light rounded text-red-500\" hx-delete=\"/notes/0\">Delete</li></ul>
 <li id=\"
 \" class=\"
 \" data-id=\"
