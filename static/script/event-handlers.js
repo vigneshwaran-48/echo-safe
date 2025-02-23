@@ -74,14 +74,14 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   document.body.addEventListener("onactivenote", e => {
-    handleSidebarChange(e.detail.id);
+    // handleSidebarChange(e.detail.id);
     document.title = e.detail.title;
     const navLink = document.querySelector(`#note-sidenav-${e.detail.id}`);
     navLink.addEventListener("contextmenu", e => onNoteSidebarContextClick(navLink, e));
   })
 
   document.body.addEventListener("oncreatenote", e => {
-    handleSidebarChange(e.detail.id);
+    // handleSidebarChange(e.detail.id);
     history.pushState(null, "", `/notes/${e.detail.id}`);
     document.title = e.detail.title;
     const navLink = document.querySelector(`#note-sidenav-${e.detail.id}`);

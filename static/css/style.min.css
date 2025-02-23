@@ -524,8 +524,17 @@
   .static {
     position: static;
   }
+  .z-1 {
+    z-index: 1;
+  }
+  .z-6 {
+    z-index: 6;
+  }
   .z-\[��c�Z�\] {
     z-index: ��c�Z�;
+  }
+  .m-9 {
+    margin: calc(var(--spacing) * 9);
   }
   .block {
     display: block;
@@ -548,6 +557,9 @@
   .size-6 {
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
+  }
+  .h-2 {
+    height: calc(var(--spacing) * 2);
   }
   .h-\[calc\(100\%-40px\)\] {
     height: calc(100% - 40px);
