@@ -29,8 +29,8 @@ func CreateDB() *sql.DB {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       note_id INTEGER NOT NULL UNIQUE,
       active TINYINT(1) default 0,
-      FOREIGN KEY note_id REFERENCES note (id)
-    )`)
+      FOREIGN KEY (note_id) REFERENCES note (id)
+    );`)
 	if err != nil {
 		log.Fatal("Failed to create tables:", err)
 	}

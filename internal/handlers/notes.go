@@ -61,6 +61,10 @@ func (handler *NotesHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	if note == nil {
+		http.Error(w, "Note not found", http.StatusNotFound)
+		return
+	}
 	if IsHxRequest(r) {
 		// HTMX request hence partial render the page.
 		w.Header().Add("HX-Trigger", fmt.Sprintf("{\"onactivenote\": {\"id\": %d, \"title\": \"%s\"}}", note.Id, note.Title))
