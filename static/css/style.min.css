@@ -524,6 +524,9 @@
   .static {
     position: static;
   }
+  .z-\[��c�Z�\] {
+    z-index: ��c�Z�;
+  }
   .block {
     display: block;
   }
@@ -871,6 +874,10 @@
   }
   .preview tbody tr:nth-child(even) {
     background-color: var(--color-dark);
+  }
+  .nav-link.htmx-swapping {
+    opacity: 0;
+    transition: opacity 1s ease-out;
   }
 }
 @keyframes spin {

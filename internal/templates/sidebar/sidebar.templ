@@ -15,8 +15,8 @@ templ SidebarContextMenu() {
 	>
 		<li class="px-2 py-1 cursor-pointer hover:bg-light rounded">Bookmark</li>
 		<li
+			id="note-context-menu-delete"
 			class="delete px-2 py-1 cursor-pointer hover:bg-light rounded text-red-500"
-			hx-delete="/notes/0"
 		>Delete</li>
 	</ul>
 }
@@ -32,11 +32,14 @@ templ SidebarNote(note *models.Note, activeNote int64) {
 		id={ fmt.Sprintf("note-sidenav-%d", note.Id) }
 		class={ className }
 		data-id={ strconv.Itoa(int(note.Id)) }
+		hx-swap="outerHTML swap:1s"
+		hx-target="closest li"
 	>
 		<a
 			hx-get={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }
 			hx-push-url="true"
 			hx-target="#main-content"
+			hx-swap="innerHTML"
 		>
 			if len(note.Title) > 15 {
 				<p>{ fmt.Sprintf("%s...", string(note.Title[0:15])) }</p>
@@ -44,6 +47,7 @@ templ SidebarNote(note *models.Note, activeNote int64) {
 				<p>{ note.Title }</p>
 			}
 		</a>
+		<div class="delete hidden" hx-delete={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }></div>
 	</li>
 }
 
