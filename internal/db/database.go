@@ -23,5 +23,16 @@ func CreateDB() *sql.DB {
 	if err != nil {
 		log.Fatal("Failed to create tables:", err)
 	}
+
+	_, err = db.Exec(`
+    CREATE TABLE IF NOT EXISTS open_note (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      note_id INTEGER NOT NULL UNIQUE,
+      active TINYINT(1) default 0,
+      FOREIGN KEY note_id REFERENCES note (id)
+    )`)
+	if err != nil {
+		log.Fatal("Failed to create tables:", err)
+	}
 	return db
 }

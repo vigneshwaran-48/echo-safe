@@ -27,6 +27,9 @@ func (repository *NoteRepository) FindById(id int64) (*models.Note, error) {
 	query := `SELECT id, title, content FROM note WHERE id = ?`
 	err := repository.db.QueryRow(query, id).Scan(&note.Id, &note.Title, &note.Content)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
 		return nil, err
 	}
 	return note, nil

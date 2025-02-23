@@ -524,8 +524,14 @@
   .static {
     position: static;
   }
+  .z-6 {
+    z-index: 6;
+  }
   .z-\[��c�Z�\] {
     z-index: ��c�Z�;
+  }
+  .m-9 {
+    margin: calc(var(--spacing) * 9);
   }
   .block {
     display: block;
