@@ -94,7 +94,7 @@ func (handler *NotesHandler) UpdateNote(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 	// Adding header for updating the title
-	w.Header().Add("HX-Trigger", fmt.Sprintf("{\"onactivenote\": {\"id\": %d, \"title\": \"%s\"}}", note.Id, note.Title))
+	w.Header().Add("HX-Trigger-After-Swap", fmt.Sprintf("{\"onactivenote\": {\"id\": %d, \"title\": \"%s\"}}", note.Id, note.Title))
 	err = updatenote.UpdateNote(note).Render(r.Context(), w)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

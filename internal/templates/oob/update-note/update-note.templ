@@ -3,18 +3,23 @@ package updatenote
 import (
 	"fmt"
 	"github.com/vigneshwaran-48/echo-safe/internal/models"
+	"strconv"
 )
 
 templ UpdateNote(note *models.Note) {
 	<li
 		id={ fmt.Sprintf("note-sidenav-%d", note.Id) }
-		class="nav-link p-2 hover:bg-dark-hover hover:text-primary-text transition rounded cursor-pointer text-primary-text bg-dark-hover"
+		class="nav-link text-primary-text bg-dark-hover p-2 hover:bg-dark-hover hover:text-primary-text transition rounded cursor-pointer"
+		data-id={ strconv.Itoa(int(note.Id)) }
+		hx-swap="outerHTML swap:1s"
+		hx-target="closest li"
 		hx-swap-oob="true"
 	>
 		<a
 			hx-get={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }
 			hx-push-url="true"
 			hx-target="#main-content"
+			hx-swap="innerHTML"
 		>
 			if len(note.Title) > 15 {
 				<p>{ fmt.Sprintf("%s...", string(note.Title[0:15])) }</p>
@@ -22,5 +27,6 @@ templ UpdateNote(note *models.Note) {
 				<p>{ note.Title }</p>
 			}
 		</a>
+		<div class="delete hidden" hx-delete={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }></div>
 	</li>
 }

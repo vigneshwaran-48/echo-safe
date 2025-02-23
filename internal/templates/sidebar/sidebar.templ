@@ -33,7 +33,7 @@ templ SidebarNote(note *models.Note, activeNote int64) {
 		class={ className }
 		data-id={ strconv.Itoa(int(note.Id)) }
 		hx-swap="outerHTML swap:1s"
-		hx-target="closest li"
+    hx-target="closest li"
 	>
 		<a
 			hx-get={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }

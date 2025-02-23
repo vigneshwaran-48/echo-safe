@@ -24,6 +24,17 @@ const getPosition = (e) => {
   }
 }
 
+const onNoteSidebarContextClick = (navLink, e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  const menu = document.querySelector("#sidebar-context-menu");
+  const pos = getPosition(e);
+  menu.style.left = `${pos.x}px`;
+  menu.style.top = `${pos.y}px`;
+  menu.classList.add("scale-100");
+  document.querySelector("#note-context-menu-delete").dataset.id = navLink.dataset.id;
+}
+
 document.addEventListener("DOMContentLoaded", function() {
   document.getElementById("sidebar-toggle").addEventListener("click", function() {
     document.getElementById("sidebar").classList.toggle("w-0");
@@ -65,25 +76,20 @@ document.addEventListener("DOMContentLoaded", function() {
   document.body.addEventListener("onactivenote", e => {
     handleSidebarChange(e.detail.id);
     document.title = e.detail.title;
+    const navLink = document.querySelector(`#note-sidenav-${e.detail.id}`);
+    navLink.addEventListener("contextmenu", e => onNoteSidebarContextClick(navLink, e));
   })
 
   document.body.addEventListener("oncreatenote", e => {
     handleSidebarChange(e.detail.id);
     history.pushState(null, "", `/notes/${e.detail.id}`);
     document.title = e.detail.title;
+    const navLink = document.querySelector(`#note-sidenav-${e.detail.id}`);
+    navLink.addEventListener("contextmenu", e => onNoteSidebarContextClick(navLink, e));
   })
 
   document.querySelectorAll(".nav-link").forEach(navLink => {
-    navLink.addEventListener("contextmenu", e => {
-      e.preventDefault();
-      e.stopPropagation();
-      const menu = document.querySelector("#sidebar-context-menu");
-      const pos = getPosition(e);
-      menu.style.left = `${pos.x}px`;
-      menu.style.top = `${pos.y}px`;
-      menu.classList.add("scale-100");
-      document.querySelector("#note-context-menu-delete").dataset.id = navLink.dataset.id;
-    });
+    navLink.addEventListener("contextmenu", e => onNoteSidebarContextClick(navLink, e));
   });
 
   document.querySelector("#note-context-menu-delete").addEventListener("click", e => {
