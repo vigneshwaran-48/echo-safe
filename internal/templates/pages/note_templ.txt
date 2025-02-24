@@ -2,6 +2,7 @@
 \"><input name=\"title\" class=\"note-title-input outline-none py-2\" value=\"
 \" hx-patch=\"
 \" hx-trigger=\"keyup changed delay:500ms\" data-preview=\"
+\" _=\"
 \"> <textarea class=\"note-content-input outline-none w-full resize-none h-[calc(100%-40px)]\" name=\"content\" hx-patch=\"
 \" hx-trigger=\"keyup changed delay:500ms\" data-preview=\"
 \">

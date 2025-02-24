@@ -16,6 +16,7 @@ templ NotePage(note *models.Note) {
 				hx-patch={ fmt.Sprintf("/notes/%d", note.Id) }
 				hx-trigger="keyup changed delay:500ms"
 				data-preview={ fmt.Sprintf("note-preview-%d", note.Id) }
+				_={ fmt.Sprintf("on keyup set val to my value then if val.length > 15 set displayText to val.substring(0, 15) + '...' else set displayText to val end then put displayText into <#note-sidenav-%d > a />", note.Id) }
 			/>
 			<textarea
 				class="note-content-input outline-none w-full resize-none h-[calc(100%-40px)]"

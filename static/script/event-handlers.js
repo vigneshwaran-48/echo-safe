@@ -1,11 +1,4 @@
 
-const handleSidebarChange = id => {
-  document.querySelectorAll(".nav-link").forEach(navLink => {
-    navLink.classList.remove("text-primary-text", "bg-dark-hover");
-  });
-  document.querySelector(`#note-sidenav-${id}`).classList.add("text-primary-text", "bg-dark-hover");
-}
-
 const getPosition = (e) => {
   let posx = 0;
   let posy = 0;
@@ -73,15 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  document.body.addEventListener("onactivenote", e => {
-    // handleSidebarChange(e.detail.id);
-    document.title = e.detail.title;
-    const navLink = document.querySelector(`#note-sidenav-${e.detail.id}`);
-    navLink.addEventListener("contextmenu", e => onNoteSidebarContextClick(navLink, e));
-  })
-
   document.body.addEventListener("oncreatenote", e => {
-    // handleSidebarChange(e.detail.id);
     history.pushState(null, "", `/notes/${e.detail.id}`);
     document.title = e.detail.title;
     const navLink = document.querySelector(`#note-sidenav-${e.detail.id}`);

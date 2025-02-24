@@ -10,7 +10,6 @@ import (
 	"github.com/vigneshwaran-48/echo-safe/internal/service"
 	"github.com/vigneshwaran-48/echo-safe/internal/templates"
 	notesidebar "github.com/vigneshwaran-48/echo-safe/internal/templates/oob/note-sidebar"
-	updatenote "github.com/vigneshwaran-48/echo-safe/internal/templates/oob/update-note"
 	"github.com/vigneshwaran-48/echo-safe/internal/templates/pages"
 )
 
@@ -67,7 +66,6 @@ func (handler *NotesHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 	}
 	if IsHxRequest(r) {
 		// HTMX request hence partial render the page.
-		w.Header().Add("HX-Trigger", fmt.Sprintf("{\"onactivenote\": {\"id\": %d, \"title\": \"%s\"}}", note.Id, note.Title))
 		err = pages.NotePage(note).Render(r.Context(), w)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -92,14 +90,7 @@ func (handler *NotesHandler) UpdateNote(w http.ResponseWriter, r *http.Request) 
 	}
 	title := r.FormValue("title")
 	content := r.FormValue("content")
-	note, err := handler.service.UpdateNote(int64(noteId), title, content)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	// Adding header for updating the title
-	w.Header().Add("HX-Trigger-After-Swap", fmt.Sprintf("{\"onactivenote\": {\"id\": %d, \"title\": \"%s\"}}", note.Id, note.Title))
-	err = updatenote.UpdateNote(note).Render(r.Context(), w)
+	_, err = handler.service.UpdateNote(int64(noteId), title, content)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -110,10 +101,6 @@ func (handler *NotesHandler) DeleteNote(w http.ResponseWriter, r *http.Request) 
 	noteId, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
 		http.Error(w, "Id should be a number", http.StatusBadRequest)
-		return
-	}
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	err = handler.service.DeleteNote(int64(noteId))

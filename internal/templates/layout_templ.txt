@@ -3,6 +3,7 @@
 \"></script><script src=\"/static/script/response-targets.js\" nonce=\"
 \"></script><script src=\"/static/script/marked.min.js\" nonce=\"
 \"></script><script src=\"/static/script/purify.min.js\" nonce=\"
+\"></script><script src=\"/static/script/hyperscript.min.js\" nonce=\"
 \"></script><script src=\"/static/script/event-handlers.js\" nonce=\"
 \"></script><link rel=\"stylesheet\" href=\"/static/css/style.min.css\" nonce=\"
 \"></head>
