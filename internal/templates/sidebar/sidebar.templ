@@ -32,7 +32,7 @@ templ SidebarNote(note *models.Note, activeNote int64) {
 		id={ fmt.Sprintf("note-sidenav-%d", note.Id) }
 		class={ className }
 		data-id={ strconv.Itoa(int(note.Id)) }
-		hx-swap="outerHTML swap:1s"
+		hx-swap="outerHTML swap:0.2s"
 		hx-target="closest li"
 	>
 		<a
