@@ -10,6 +10,10 @@ type OpenNotesRepository struct {
 	db *sql.DB
 }
 
+func CreateOpenNotesRepository(db *sql.DB) *OpenNotesRepository {
+	return &OpenNotesRepository{db}
+}
+
 func (repository *OpenNotesRepository) Save(openNote *models.OpenNote) error {
 	query := `
     INSERT INTO open_note (note_id, active) values (?, ?) RETURNING id
@@ -64,6 +68,9 @@ func (repository *OpenNotesRepository) FindByNoteId(noteId int64) (*models.OpenN
 	openNote := &models.OpenNote{}
 	err := repository.db.QueryRow(query, noteId).Scan(&openNote.Id, &openNote.NoteId, &openNote.Active)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
 		return nil, err
 	}
 	return openNote, nil

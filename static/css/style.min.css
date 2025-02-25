@@ -530,8 +530,14 @@
   .static {
     position: static;
   }
+  .m-9 {
+    margin: calc(var(--spacing) * 9);
+  }
   .block {
     display: block;
+  }
+  .contents {
+    display: contents;
   }
   .flex {
     display: flex;
@@ -548,6 +554,9 @@
   .size-6 {
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
+  }
+  .h-4 {
+    height: calc(var(--spacing) * 4);
   }
   .h-\[calc\(100\%-40px\)\] {
     height: calc(100% - 40px);
@@ -660,6 +669,9 @@
   }
   .p-2 {
     padding: calc(var(--spacing) * 2);
+  }
+  .p-3 {
+    padding: calc(var(--spacing) * 3);
   }
   .p-4 {
     padding: calc(var(--spacing) * 4);

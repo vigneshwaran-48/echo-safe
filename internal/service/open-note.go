@@ -12,6 +12,10 @@ type OpenNoteService struct {
 	repository *repository.OpenNotesRepository
 }
 
+func CreateOpenNotesService(repository *repository.OpenNotesRepository) *OpenNoteService {
+	return &OpenNoteService{repository}
+}
+
 func (service *OpenNoteService) AddOpenNote(id int64) (*models.OpenNote, error) {
 	existingNote, err := service.repository.FindByNoteId(id)
 	if err != nil {
@@ -39,4 +43,12 @@ func (service *OpenNoteService) SetActive(id int64, active bool) error {
 	}
 	openNote.Active = active
 	return service.repository.Update(openNote)
+}
+
+func (service *OpenNoteService) GetOpenNote(id int64) (*models.OpenNote, error) {
+	openNote, err := service.repository.FindByNoteId(id)
+	if err != nil {
+		return nil, err
+	}
+	return openNote, err
 }

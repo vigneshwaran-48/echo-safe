@@ -18,7 +18,11 @@ func SetupRouter(db *sql.DB, r chi.Router) http.Handler {
 
 	notesRespository := repository.CreateNoteRepository(db)
 	notesService := service.CreateNoteService(notesRespository)
-	notesHandler := handlers.CreateNotesHandler(notesService)
+
+	openNotesRepository := repository.CreateOpenNotesRepository(db)
+	openNotesService := service.CreateOpenNotesService(openNotesRepository)
+
+	notesHandler := handlers.CreateNotesHandler(notesService, openNotesService)
 	homeHanlder := handlers.CreateHomeHandler(notesService)
 
 	r.Group(func(r chi.Router) {
