@@ -59,7 +59,7 @@ templ topbarIcons(icon templ.Component, id string) {
 }
 
 templ SideTopbar() {
-	<div class="flex items-center">
+	<div class="flex items-center w-[200px]">
 		<span class="px-2 cursor-pointer" id="sidebar-toggle">
 			@sidebar.SidebarIcon("w-[20px] text-white")
 		</span>
@@ -74,7 +74,7 @@ templ SideTopbar() {
 }
 
 templ Sidebar(notes []models.Note, activeNote int64) {
-	<nav id="sidebar" class="h-full bg-dark w-[250px] flex flex-col space-between transition-all overflow-hidden duration-100">
+	<nav id="sidebar" class="h-full bg-dark w-[200px] flex-shrink-0 flex flex-col space-between transition-all overflow-hidden duration-100">
 		<div class="w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700">
 			<ul id="notes-sidebar" class="p-2 h-full overflow-y-scroll">
 				for _, note := range notes {

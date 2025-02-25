@@ -20,9 +20,20 @@ templ head(title string) {
 	</head>
 }
 
+templ openNoteBar(title string) {
+	<div class="p-2 flex-grow flex-shrink hover:bg-dark-hover">
+		{ title }
+	</div>
+}
+
 templ header() {
-	<header class="p-2">
+	<header class="p-2 flex">
 		@sidebar.SideTopbar()
+		<div class="flex w-[calc(100%-200px)]">
+			@openNoteBar("Title 1")
+			@openNoteBar("Title 2")
+			@openNoteBar("Title 3")
+		</div>
 	</header>
 }
 
