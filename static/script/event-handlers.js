@@ -67,6 +67,10 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   document.body.addEventListener("oncreatenote", e => {
+    document.querySelectorAll(".nav-link").forEach(navLink => {
+      navLink.classList.remove("text-primary-text", "bg-dark-hover");
+    });
+    document.querySelector(`#note-sidenav-${e.detail.id}`).classList.add("text-primary-text", "bg-dark-hover");
     history.pushState(null, "", `/notes/${e.detail.id}`);
     document.title = e.detail.title;
     const navLink = document.querySelector(`#note-sidenav-${e.detail.id}`);

@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -14,11 +15,12 @@ import (
 )
 
 type NotesHandler struct {
-	service *service.NoteService
+	service          *service.NoteService
+	openNotesService *service.OpenNoteService
 }
 
-func CreateNotesHandler(service *service.NoteService) *NotesHandler {
-	return &NotesHandler{service}
+func CreateNotesHandler(service *service.NoteService, openNotesService *service.OpenNoteService) *NotesHandler {
+	return &NotesHandler{service, openNotesService}
 }
 
 func (handler *NotesHandler) CreateNoteHandler(w http.ResponseWriter, r *http.Request) {
@@ -57,6 +59,7 @@ func (handler *NotesHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 	}
 	note, err := handler.service.GetById(int64(noteId))
 	if err != nil {
+		log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -64,6 +67,26 @@ func (handler *NotesHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Note not found", http.StatusNotFound)
 		return
 	}
+
+	openNote, err := handler.openNotesService.GetOpenNote(note.Id)
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Internal Error", http.StatusInternalServerError)
+	}
+	if openNote == nil {
+		_, err = handler.openNotesService.AddOpenNote(note.Id)
+		if err != nil {
+			log.Println(err)
+			http.Error(w, "Internal Error", http.StatusInternalServerError)
+		}
+	} else if !openNote.Active {
+		err = handler.openNotesService.SetActive(note.Id, true)
+		if err != nil {
+			log.Println(err)
+			http.Error(w, "Internal Error", http.StatusInternalServerError)
+		}
+	}
+
 	if IsHxRequest(r) {
 		// HTMX request hence partial render the page.
 		err = pages.NotePage(note).Render(r.Context(), w)
