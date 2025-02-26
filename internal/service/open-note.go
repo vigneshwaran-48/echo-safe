@@ -25,6 +25,17 @@ func (service *OpenNoteService) AddOpenNote(id int64) (*models.OpenNote, error) 
 		return nil, errors.New("Already note is open")
 	}
 
+	activeNote, err := service.repository.FindActiveNote()
+	if err != nil {
+		return nil, err
+	}
+	if activeNote != nil {
+		err = service.SetActive(activeNote.NoteId, false)
+		if err != nil {
+			return nil, err
+		}
+	}
+
 	openNote := &models.OpenNote{NoteId: id, Active: true}
 	err = service.repository.Save(openNote)
 	if err != nil {
@@ -41,6 +52,18 @@ func (service *OpenNoteService) SetActive(id int64, active bool) error {
 	if openNote == nil {
 		return fmt.Errorf("Note %d is not open", id)
 	}
+	if active {
+		activeNote, err := service.repository.FindActiveNote()
+		if err != nil {
+			return err
+		}
+		if activeNote != nil {
+			err = service.SetActive(activeNote.NoteId, false)
+			if err != nil {
+				return err
+			}
+		}
+	}
 	openNote.Active = active
 	return service.repository.Update(openNote)
 }
@@ -51,4 +74,12 @@ func (service *OpenNoteService) GetOpenNote(id int64) (*models.OpenNote, error) 
 		return nil, err
 	}
 	return openNote, err
+}
+
+func (service *OpenNoteService) GetAllOpenNotes() ([]models.OpenNote, error) {
+	openNotes, err := service.repository.FindAll()
+	if err != nil {
+		return nil, err
+	}
+	return openNotes, nil
 }

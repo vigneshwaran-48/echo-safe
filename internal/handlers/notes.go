@@ -87,6 +87,14 @@ func (handler *NotesHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	openNotes, err := handler.openNotesService.GetAllOpenNotes()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	fillNotesName(openNotes, handler.service)
+
 	if IsHxRequest(r) {
 		// HTMX request hence partial render the page.
 		err = pages.NotePage(note).Render(r.Context(), w)
@@ -102,7 +110,7 @@ func (handler *NotesHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = templates.Layout(pages.NotePage(note), note.Title, notes, note.Id).Render(r.Context(), w)
+	err = templates.Layout(pages.NotePage(note), note.Title, notes, note.Id, openNotes).Render(r.Context(), w)
 }
 
 func (handler *NotesHandler) UpdateNote(w http.ResponseWriter, r *http.Request) {
