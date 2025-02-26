@@ -21,22 +21,22 @@ templ head(title string) {
 	</head>
 }
 
-templ openNoteBar(openNote *models.OpenNote) {
+templ OpenNoteBar(openNote *models.OpenNote) {
 	{{
 	activeClass := ""
 	if openNote.Active {
 		activeClass = "bg-dark-hover"
 	}
 	}}
-	<div class={ fmt.Sprintf("p-2 flex-grow flex-shrink rounded hover:bg-dark-hover %s", activeClass) }>
+	<div id={ fmt.Sprintf("open-tab-bar-%d", openNote.NoteId) } class={ fmt.Sprintf("p-2 flex-grow flex-shrink rounded hover:bg-dark-hover %s", activeClass) }>
 		{ openNote.Title }
 	</div>
 }
 
-templ OpenNotesTab(openNotes []models.OpenNote) {
+templ openNotesTab(openNotes []models.OpenNote) {
 	<div id="open-notes" class="flex w-[calc(100%-200px)]">
 		for _, openNote := range openNotes {
-			@openNoteBar(&openNote)
+			@OpenNoteBar(&openNote)
 		}
 	</div>
 }
@@ -44,7 +44,7 @@ templ OpenNotesTab(openNotes []models.OpenNote) {
 templ header(openNotes []models.OpenNote) {
 	<header class="p-2 flex">
 		@sidebar.SideTopbar()
-		@OpenNotesTab(openNotes)
+		@openNotesTab(openNotes)
 	</header>
 }
 

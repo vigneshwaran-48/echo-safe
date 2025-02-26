@@ -31,7 +31,10 @@ func (handler *HomeHandler) Home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fillNotesName(openNotes, handler.notesService)
+	err = fillNotesName(openNotes, handler.notesService)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 
 	// TODO Need to change it to active note once the last active note changes have been done
 	err = templates.Layout(index, "Echo Safe", notes, 0, openNotes).Render(r.Context(), w)

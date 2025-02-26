@@ -4,8 +4,8 @@ import "github.com/vigneshwaran-48/echo-safe/internal/models"
 import "github.com/vigneshwaran-48/echo-safe/internal/templates/pages"
 import "github.com/vigneshwaran-48/echo-safe/internal/templates/sidebar"
 
-templ NoteWithSidebar(note *models.Note) {
-	@pages.NotePage(note)
+templ NoteWithSidebar(note *models.Note, openNotes []models.OpenNote) {
+	@pages.NotePage(note, openNotes)
 	<ul id="notes-sidebar" hx-swap-oob="beforeend">
 		@sidebar.SidebarNote(note, note.Id)
 	</ul>

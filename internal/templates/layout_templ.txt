@@ -7,7 +7,8 @@
 \"></script><script src=\"/static/script/event-handlers.js\" nonce=\"
 \"></script><link rel=\"stylesheet\" href=\"/static/css/style.min.css\" nonce=\"
 \"></head>
-<div class=\"
+<div id=\"
+\" class=\"
 \">
 </div>
 <div id=\"open-notes\" class=\"flex w-[calc(100%-200px)]\">
