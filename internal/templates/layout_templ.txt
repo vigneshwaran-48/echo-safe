@@ -7,11 +7,14 @@
 \"></script><script src=\"/static/script/event-handlers.js\" nonce=\"
 \"></script><link rel=\"stylesheet\" href=\"/static/css/style.min.css\" nonce=\"
 \"></head>
-<div class=\"p-2 flex-grow flex-shrink hover:bg-dark-hover\">
+<div id=\"
+\" class=\"
+\">
+</div>
+<div id=\"open-notes\" class=\"flex w-[calc(100%-200px)]\">
 </div>
 <header class=\"p-2 flex\">
-<div class=\"flex w-[calc(100%-200px)]\">
-</div></header>
+</header>
 <body class=\"w-full h-full flex flex-col bg-light text-secondary-text\">
 <div class=\"flex w-full h-[calc(100%-40px)]\">
 <div class=\"flex flex-grow flex-col space-between w-full h-full\"><div class=\"w-full h-[calc(100%-40px)]\"><div id=\"main-content\" class=\"w-full h-full p-1\">

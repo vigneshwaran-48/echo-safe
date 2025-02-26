@@ -34,8 +34,23 @@ func (handler *NotesHandler) CreateNoteHandler(w http.ResponseWriter, r *http.Re
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	_, err = handler.openNotesService.AddOpenNote(note.Id)
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Internal Error", http.StatusInternalServerError)
+	}
+	openNotes, err := handler.openNotesService.GetAllOpenNotes()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	err = fillNotesName(openNotes, handler.service)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 	w.Header().Add("HX-Trigger-After-Swap", fmt.Sprintf("{\"oncreatenote\": {\"id\": %d, \"title\": \"%s\"}}", note.Id, note.Title))
-	err = notesidebar.NoteWithSidebar(note).Render(r.Context(), w)
+	err = notesidebar.NoteWithSidebar(note, openNotes).Render(r.Context(), w)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -87,9 +102,20 @@ func (handler *NotesHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	openNotes, err := handler.openNotesService.GetAllOpenNotes()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	err = fillNotesName(openNotes, handler.service)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
 	if IsHxRequest(r) {
 		// HTMX request hence partial render the page.
-		err = pages.NotePage(note).Render(r.Context(), w)
+		err = pages.NotePage(note, openNotes).Render(r.Context(), w)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -102,7 +128,7 @@ func (handler *NotesHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = templates.Layout(pages.NotePage(note), note.Title, notes, note.Id).Render(r.Context(), w)
+	err = templates.Layout(pages.NotePage(note, nil), note.Title, notes, note.Id, openNotes).Render(r.Context(), w)
 }
 
 func (handler *NotesHandler) UpdateNote(w http.ResponseWriter, r *http.Request) {

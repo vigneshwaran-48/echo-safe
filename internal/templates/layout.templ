@@ -4,6 +4,7 @@ import "github.com/vigneshwaran-48/echo-safe/internal/middleware"
 
 import "github.com/vigneshwaran-48/echo-safe/internal/templates/sidebar"
 import "github.com/vigneshwaran-48/echo-safe/internal/models"
+import "fmt"
 
 templ head(title string) {
 	<head>
@@ -20,27 +21,37 @@ templ head(title string) {
 	</head>
 }
 
-templ openNoteBar(title string) {
-	<div class="p-2 flex-grow flex-shrink hover:bg-dark-hover">
-		{ title }
+templ OpenNoteBar(openNote *models.OpenNote) {
+	{{
+	activeClass := ""
+	if openNote.Active {
+		activeClass = "bg-dark-hover"
+	}
+	}}
+	<div id={ fmt.Sprintf("open-tab-bar-%d", openNote.NoteId) } class={ fmt.Sprintf("p-2 flex-grow flex-shrink rounded hover:bg-dark-hover %s", activeClass) }>
+		{ openNote.Title }
 	</div>
 }
 
-templ header() {
+templ openNotesTab(openNotes []models.OpenNote) {
+	<div id="open-notes" class="flex w-[calc(100%-200px)]">
+		for _, openNote := range openNotes {
+			@OpenNoteBar(&openNote)
+		}
+	</div>
+}
+
+templ header(openNotes []models.OpenNote) {
 	<header class="p-2 flex">
 		@sidebar.SideTopbar()
-		<div class="flex w-[calc(100%-200px)]">
-			@openNoteBar("Title 1")
-			@openNoteBar("Title 2")
-			@openNoteBar("Title 3")
-		</div>
+		@openNotesTab(openNotes)
 	</header>
 }
 
-templ Layout(content templ.Component, title string, notes []models.Note, activeNote int64) {
+templ Layout(content templ.Component, title string, notes []models.Note, activeNote int64, openNotes []models.OpenNote) {
 	@head(title)
 	<body class="w-full h-full flex flex-col bg-light text-secondary-text">
-		@header()
+		@header(openNotes)
 		<div class="flex w-full h-[calc(100%-40px)]">
 			@sidebar.Sidebar(notes, activeNote)
 			<div class="flex flex-grow flex-col space-between w-full h-full">

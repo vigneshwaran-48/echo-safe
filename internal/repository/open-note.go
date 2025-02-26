@@ -75,3 +75,17 @@ func (repository *OpenNotesRepository) FindByNoteId(noteId int64) (*models.OpenN
 	}
 	return openNote, nil
 }
+
+func (repository *OpenNotesRepository) FindActiveNote() (*models.OpenNote, error) {
+	query := `SELECT id, note_id, active from open_note WHERE active = 1`
+
+	openNote := &models.OpenNote{}
+	err := repository.db.QueryRow(query).Scan(&openNote.Id, &openNote.NoteId, &openNote.Active)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+		return nil, err
+	}
+	return openNote, nil
+}

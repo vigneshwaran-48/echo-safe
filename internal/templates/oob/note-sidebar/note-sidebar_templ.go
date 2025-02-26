@@ -12,7 +12,7 @@ import "github.com/vigneshwaran-48/echo-safe/internal/models"
 import "github.com/vigneshwaran-48/echo-safe/internal/templates/pages"
 import "github.com/vigneshwaran-48/echo-safe/internal/templates/sidebar"
 
-func NoteWithSidebar(note *models.Note) templ.Component {
+func NoteWithSidebar(note *models.Note, openNotes []models.OpenNote) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -33,7 +33,7 @@ func NoteWithSidebar(note *models.Note) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = pages.NotePage(note).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = pages.NotePage(note, openNotes).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
