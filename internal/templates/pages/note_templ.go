@@ -92,9 +92,9 @@ func NotePage(note *models.Note, openNotes []models.OpenNote) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var6 string
-		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("on keyup set val to my value then if val.length > 15 set displayText to val.substring(0, 15) + '...' else set displayText to val end then put displayText into <#note-sidenav-%d > a /> then put displayText into <#open-tab-bar-%d />", note.Id, note.Id))
+		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("on keyup put my value into <#note-preview-%d > .note-title/> set val to my value then if val.length > 15 set displayText to val.substring(0, 15) + '...' else set displayText to val end then put displayText into <#note-sidenav-%d > a /> then put displayText into #open-tab-bar-%d", note.Id, note.Id, note.Id))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/note.templ`, Line: 22, Col: 271}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/pages/note.templ`, Line: 22, Col: 328}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
