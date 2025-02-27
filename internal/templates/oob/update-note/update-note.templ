@@ -21,11 +21,7 @@ templ UpdateNote(note *models.Note) {
 			hx-target="#main-content"
 			hx-swap="innerHTML"
 		>
-			if len(note.Title) > 15 {
-				<p>{ fmt.Sprintf("%s...", string(note.Title[0:15])) }</p>
-			} else {
-				<p>{ note.Title }</p>
-			}
+			<p class="overflow-hidden whitespace-nowrap text-ellipsis">{ note.Title }</p>
 		</a>
 		<div class="delete hidden" hx-delete={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }></div>
 	</li>

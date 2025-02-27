@@ -28,7 +28,7 @@ templ OpenNoteBar(openNote *models.OpenNote) {
 		activeClass = "bg-dark-hover"
 	}
 	}}
-	<div id={ fmt.Sprintf("open-tab-bar-%d", openNote.NoteId) } class={ fmt.Sprintf("p-2 flex-grow flex-shrink rounded hover:bg-dark-hover %s", activeClass) }>
+	<div id={ fmt.Sprintf("open-tab-bar-%d", openNote.NoteId) } class={ fmt.Sprintf("p-2 flex-grow flex-shrink rounded hover:bg-dark-hover text-ellipsis min-w-[0px] basis-[0px] whitespace-nowrap overflow-hidden %s", activeClass) }>
 		{ openNote.Title }
 	</div>
 }

@@ -19,7 +19,7 @@ templ NotePage(note *models.Note, openNotes []models.OpenNote) {
 				hx-patch={ fmt.Sprintf("/notes/%d", note.Id) }
 				hx-trigger="keyup changed delay:500ms"
 				data-preview={ fmt.Sprintf("note-preview-%d", note.Id) }
-				_={ fmt.Sprintf("on keyup put my value into <#note-preview-%d > .note-title/> set val to my value then if val.length > 15 set displayText to val.substring(0, 15) + '...' else set displayText to val end then put displayText into <#note-sidenav-%d > a /> then put displayText into #open-tab-bar-%d", note.Id, note.Id, note.Id) }
+				_={ fmt.Sprintf("on keyup put my value into <#note-preview-%d > .note-title/> set val to my value then put val into <#note-sidenav-%d > a > p /> then put val into #open-tab-bar-%d", note.Id, note.Id, note.Id) }
 			/>
 			<textarea
 				class="note-content-input outline-none w-full resize-none h-[calc(100%-40px)]"
