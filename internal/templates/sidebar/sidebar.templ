@@ -42,11 +42,7 @@ templ SidebarNote(note *models.Note, activeNote int64) {
 			hx-swap="innerHTML"
 			_="on htmx:afterOnLoad remove .bg-dark-hover .text-primary-text from .nav-link then add .bg-dark-hover .text-primary-text to me.parentElement"
 		>
-			if len(note.Title) > 15 {
-				<p>{ fmt.Sprintf("%s...", string(note.Title[0:15])) }</p>
-			} else {
-				<p>{ note.Title }</p>
-			}
+			<p class="overflow-hidden whitespace-nowrap text-ellipsis">{ note.Title }</p>
 		</a>
 		<div class="delete hidden" hx-delete={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }></div>
 	</li>
