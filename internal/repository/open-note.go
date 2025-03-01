@@ -36,7 +36,7 @@ func (repository *OpenNotesRepository) Update(openNote *models.OpenNote) error {
 	return err
 }
 
-func (repository *OpenNotesRepository) DeleteById(noteId int64) error {
+func (repository *OpenNotesRepository) DeleteByNoteId(noteId int64) error {
 	query := `DELETE FROM open_note WHERE note_id = ?`
 	_, err := repository.db.Exec(query, noteId)
 	return err
