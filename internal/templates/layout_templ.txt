@@ -3,8 +3,8 @@
 \"></script><script src=\"/static/script/response-targets.js\" nonce=\"
 \"></script><script src=\"/static/script/marked.min.js\" nonce=\"
 \"></script><script src=\"/static/script/purify.min.js\" nonce=\"
-\"></script><script src=\"/static/script/hyperscript.min.js\" nonce=\"
 \"></script><script src=\"/static/script/event-handlers.js\" nonce=\"
+\"></script><script src=\"/static/script/hyperscript.min.js\" nonce=\"
 \"></script><link rel=\"stylesheet\" href=\"/static/css/style.min.css\" nonce=\"
 \"></head>
 <div class=\"
@@ -15,7 +15,7 @@
 </a> 
 <span class=\"
 \" hx-delete=\"
-\" hx-target=\"#main-content\" hx-swap=\"innerHTML\" _=\"on htmx:onremoveopennote log event\">X</span></div></div>
+\" hx-target=\"#main-content\" hx-swap=\"innerHTML\">X</span></div></div>
 <div id=\"open-notes\" class=\"flex w-[calc(100%-200px)]\">
 </div>
 <header class=\"p-2 flex h-[60px]\">

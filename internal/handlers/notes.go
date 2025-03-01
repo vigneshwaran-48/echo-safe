@@ -163,6 +163,11 @@ func (handler *NotesHandler) DeleteNote(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	err = handleDeleteNoteResponse(handler, w, r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func (handler *NotesHandler) DeleteOpenNote(w http.ResponseWriter, r *http.Request) {
@@ -175,10 +180,30 @@ func (handler *NotesHandler) DeleteOpenNote(w http.ResponseWriter, r *http.Reque
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
+	err = handleDeleteNoteResponse(handler, w, r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+func getOpenNotes(handler *NotesHandler) ([]models.OpenNote, error) {
+	openNotes, err := handler.openNotesService.GetAllOpenNotes()
+	if err != nil {
+		return nil, err
+	}
+
+	err = fillNotesName(openNotes, handler.service)
+	if err != nil {
+		return nil, err
+	}
+	return openNotes, nil
+}
+
+func handleDeleteNoteResponse(handler *NotesHandler, w http.ResponseWriter, r *http.Request) error {
 	openNotes, err := getOpenNotes(handler)
 	if err != nil {
-		http.Error(w, "Internal Error", http.StatusInternalServerError)
-		return
+		return err
 	}
 	var activeNote int64
 	activeNote = 0
@@ -192,15 +217,14 @@ func (handler *NotesHandler) DeleteOpenNote(w http.ResponseWriter, r *http.Reque
 	if activeNote != 0 {
 		note, err := handler.service.GetById(activeNote)
 		if err != nil {
-			http.Error(w, "Internal Error", http.StatusInternalServerError)
-			return
+			return err
 		}
 		w.Header().Add("HX-Push-Url", fmt.Sprintf("/notes/%d", activeNote))
 
 		err = pages.NotePage(note, openNotes).Render(r.Context(), w)
 		if err != nil {
 			http.Error(w, "Internal Error", http.StatusInternalServerError)
-			return
+			return nil
 		}
 	} else {
 		w.Header().Add("HX-Push-Url", "/")
@@ -217,23 +241,11 @@ func (handler *NotesHandler) DeleteOpenNote(w http.ResponseWriter, r *http.Reque
 	notes, err := handler.service.List()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+		return nil
 	}
 	err = notesidebar.Sidebar(notes, activeNote).Render(r.Context(), w)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
-}
-
-func getOpenNotes(handler *NotesHandler) ([]models.OpenNote, error) {
-	openNotes, err := handler.openNotesService.GetAllOpenNotes()
-	if err != nil {
-		return nil, err
-	}
-
-	err = fillNotesName(openNotes, handler.service)
-	if err != nil {
-		return nil, err
-	}
-	return openNotes, nil
+	return nil
 }

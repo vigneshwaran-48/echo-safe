@@ -34,6 +34,7 @@ templ SidebarNote(note *models.Note, activeNote int64) {
 		data-id={ strconv.Itoa(int(note.Id)) }
 		hx-swap="outerHTML swap:0.2s"
 		hx-target="closest li"
+		_="on contextmenu(event) call onNoteSidebarContextClick(me, event)"
 	>
 		<a
 			hx-get={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }
@@ -70,7 +71,10 @@ templ SideTopbar() {
 }
 
 templ Sidebar(notes []models.Note, activeNote int64) {
-	<nav id="sidebar" class="h-full bg-dark w-[200px] flex-shrink-0 flex flex-col space-between transition-all overflow-hidden duration-100">
+	<nav
+		id="sidebar"
+		class="h-full bg-dark w-[200px] flex-shrink-0 flex flex-col space-between transition-all overflow-hidden duration-100"
+	>
 		<div class="w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700">
 			<ul id="notes-sidebar" class="p-2 h-full overflow-y-scroll">
 				for _, note := range notes {

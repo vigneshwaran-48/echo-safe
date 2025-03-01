@@ -15,8 +15,8 @@ templ head(title string) {
 		<script src="/static/script/response-targets.js" nonce={ middleware.GetResponseTargetsNonce(ctx) }></script>
 		<script src="/static/script/marked.min.js" nonce={ middleware.GetResponseTargetsNonce(ctx) }></script>
 		<script src="/static/script/purify.min.js" nonce={ middleware.GetResponseTargetsNonce(ctx) }></script>
-		<script src="/static/script/hyperscript.min.js" nonce={ middleware.GetResponseTargetsNonce(ctx) }></script>
 		<script src="/static/script/event-handlers.js" nonce={ middleware.GetResponseTargetsNonce(ctx) }></script>
+		<script src="/static/script/hyperscript.min.js" nonce={ middleware.GetResponseTargetsNonce(ctx) }></script>
 		<link rel="stylesheet" href="/static/css/style.min.css" nonce={ middleware.GetTwNonce(ctx) }/>
 	</head>
 }
@@ -50,7 +50,6 @@ templ OpenNoteBar(openNote *models.OpenNote) {
 				hx-delete={ fmt.Sprintf("/notes/%d/open", openNote.NoteId) }
 				hx-target="#main-content"
 				hx-swap="innerHTML"
-        _="on htmx:onremoveopennote log event"
 			>X</span>
 		</div>
 	</div>
