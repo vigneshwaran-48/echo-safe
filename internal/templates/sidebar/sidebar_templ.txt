@@ -5,7 +5,7 @@
 \" hx-swap=\"outerHTML swap:0.2s\" hx-target=\"closest li\" _=\"on contextmenu(event) call onNoteSidebarContextClick(me, event)\"><a hx-get=\"
 \" hx-push-url=\"true\" hx-target=\"#main-content\" hx-swap=\"innerHTML\" _=\"on htmx:afterOnLoad remove .bg-dark-hover .text-primary-text from .nav-link then add .bg-dark-hover .text-primary-text to me.parentElement\"><p class=\"overflow-hidden whitespace-nowrap text-ellipsis\">
 </p></a><div class=\"delete hidden\" hx-delete=\"
-\"></div></li>
+\" hx-target=\"#main-content\" hx-swap=\"innerHTML\"></div></li>
 <span id=\"
 \" class=\"px-2\">
 </span>

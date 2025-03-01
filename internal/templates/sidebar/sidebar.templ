@@ -45,7 +45,12 @@ templ SidebarNote(note *models.Note, activeNote int64) {
 		>
 			<p class="overflow-hidden whitespace-nowrap text-ellipsis">{ note.Title }</p>
 		</a>
-		<div class="delete hidden" hx-delete={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }></div>
+		<div
+			class="delete hidden"
+			hx-delete={ string(templ.URL(fmt.Sprintf("/notes/%d", note.Id))) }
+			hx-target="#main-content"
+			hx-swap="innerHTML"
+		></div>
 	</li>
 }
 
