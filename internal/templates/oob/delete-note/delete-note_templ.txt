@@ -1,2 +1,0 @@
-<ul id=\"notes-sidebar\" hx-swap-oob=\"delete\">
-</ul>

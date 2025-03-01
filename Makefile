@@ -34,8 +34,6 @@ dev:
 
 .PHONY: build
 build:
-	make tailwind-build
-	make templ-generate
 	go build -ldflags "-X main.Environment=production" -o ./bin/$(APP_NAME) ./cmd/server/main.go
 
 .PHONY: docker-build

@@ -536,6 +536,12 @@
   .static {
     position: static;
   }
+  .sticky {
+    position: sticky;
+  }
+  .mr-1 {
+    margin-right: calc(var(--spacing) * 1);
+  }
   .block {
     display: block;
   }
@@ -551,6 +557,9 @@
   .inline {
     display: inline;
   }
+  .inline-block {
+    display: inline-block;
+  }
   .inline-flex {
     display: inline-flex;
   }
@@ -564,17 +573,14 @@
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
   }
-  .h-\[60px\] {
-    height: 60px;
+  .h-6 {
+    height: calc(var(--spacing) * 6);
   }
   .h-\[calc\(100\%-40px\)\] {
     height: calc(100% - 40px);
   }
   .h-\[calc\(100\%-50px\)\] {
     height: calc(100% - 50px);
-  }
-  .h-\[calc\(100\%-60px\)\] {
-    height: calc(100% - 60px);
   }
   .h-fit {
     height: fit-content;
@@ -584,6 +590,9 @@
   }
   .w-0 {
     width: calc(var(--spacing) * 0);
+  }
+  .w-8 {
+    width: calc(var(--spacing) * 8);
   }
   .w-\[200px\] {
     width: 200px;
@@ -812,6 +821,33 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-primary-text);
+      }
+    }
+  }
+  .hover\:\[\&_\.close-button\]\:inline-block {
+    &:hover {
+      @media (hover: hover) {
+        & .close-button {
+          display: inline-block;
+        }
+      }
+    }
+  }
+  .hover\:\[\&\>\.close-button\]\:inline-block {
+    &:hover {
+      @media (hover: hover) {
+        &>.close-button {
+          display: inline-block;
+        }
+      }
+    }
+  }
+  .hover\:\[\&amp\;\&gt\;\.close-button\]\:inline-block {
+    &:hover {
+      @media (hover: hover) {
+        &amp;&gt;.close-button {
+          display: inline-block;
+        }
       }
     }
   }
