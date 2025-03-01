@@ -36,8 +36,13 @@ func (handler *HomeHandler) Home(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
-	// TODO Need to change it to active note once the last active note changes have been done
-	err = templates.Layout(index, "Echo Safe", notes, 0, openNotes).Render(r.Context(), w)
+	var activeOpenNote int64
+	for _, openNote := range openNotes {
+		if openNote.Active {
+			activeOpenNote = openNote.NoteId
+		}
+	}
+	err = templates.Layout(index, "Echo Safe", notes, activeOpenNote, openNotes).Render(r.Context(), w)
 	if err != nil {
 		http.Error(w, "Error rendering template", http.StatusInternalServerError)
 		return
