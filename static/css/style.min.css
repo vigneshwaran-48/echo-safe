@@ -536,11 +536,8 @@
   .static {
     position: static;
   }
-  .sticky {
-    position: sticky;
-  }
-  .mr-1 {
-    margin-right: calc(var(--spacing) * 1);
+  .mr-2 {
+    margin-right: calc(var(--spacing) * 2);
   }
   .block {
     display: block;
@@ -573,9 +570,6 @@
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
   }
-  .h-6 {
-    height: calc(var(--spacing) * 6);
-  }
   .h-\[calc\(100\%-40px\)\] {
     height: calc(100% - 40px);
   }
@@ -591,9 +585,6 @@
   .w-0 {
     width: calc(var(--spacing) * 0);
   }
-  .w-8 {
-    width: calc(var(--spacing) * 8);
-  }
   .w-\[200px\] {
     width: 200px;
   }
@@ -608,6 +599,9 @@
   }
   .w-full {
     width: 100%;
+  }
+  .max-w-\[200px\] {
+    max-width: 200px;
   }
   .max-w-\[700px\] {
     max-width: 700px;
@@ -828,24 +822,6 @@
     &:hover {
       @media (hover: hover) {
         & .close-button {
-          display: inline-block;
-        }
-      }
-    }
-  }
-  .hover\:\[\&\>\.close-button\]\:inline-block {
-    &:hover {
-      @media (hover: hover) {
-        &>.close-button {
-          display: inline-block;
-        }
-      }
-    }
-  }
-  .hover\:\[\&amp\;\&gt\;\.close-button\]\:inline-block {
-    &:hover {
-      @media (hover: hover) {
-        &amp;&gt;.close-button {
           display: inline-block;
         }
       }

@@ -1,0 +1,25 @@
+<head><title>
+</title><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><script src=\"/static/script/htmx.min.js\" nonce=\"
+\"></script><script src=\"/static/script/response-targets.js\" nonce=\"
+\"></script><script src=\"/static/script/marked.min.js\" nonce=\"
+\"></script><script src=\"/static/script/purify.min.js\" nonce=\"
+\"></script><script src=\"/static/script/hyperscript.min.js\" nonce=\"
+\"></script><script src=\"/static/script/event-handlers.js\" nonce=\"
+\"></script><link rel=\"stylesheet\" href=\"/static/css/style.min.css\" nonce=\"
+\"></head>
+<div class=\"
+\"><div class=\"flex \"><a id=\"
+\" class=\"flex-grow flex-shrink text-ellipsis min-w-[0px] basis-[0px] whitespace-nowrap overflow-hidden\" hx-get=\"
+\" hx-target=\"#main-content\" hx-swap=\"innerHTML\" hx-push-url=\"true\" _=\"
+\">
+</a> 
+<span class=\"
+\">X</span></div></div>
+<div id=\"open-notes\" class=\"flex w-[calc(100%-200px)]\">
+</div>
+<header class=\"p-2 flex\">
+</header>
+<body class=\"w-full h-full flex flex-col bg-light text-secondary-text\">
+<div class=\"flex w-full h-[calc(100%-40px)]\">
+<div class=\"flex flex-grow flex-col space-between w-full h-full\"><div class=\"w-full h-[calc(100%-40px)]\"><div id=\"main-content\" class=\"w-full h-full p-1\">
+</div></div></div></div></body>
