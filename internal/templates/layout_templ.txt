@@ -7,10 +7,14 @@
 \"></script><script src=\"/static/script/event-handlers.js\" nonce=\"
 \"></script><link rel=\"stylesheet\" href=\"/static/css/style.min.css\" nonce=\"
 \"></head>
-<div id=\"
-\" class=\"
+<div class=\"
+\"><div class=\"flex \"><a id=\"
+\" class=\"flex-grow flex-shrink text-ellipsis min-w-[0px] basis-[0px] whitespace-nowrap overflow-hidden\" hx-get=\"
+\" hx-target=\"#main-content\" hx-swap=\"innerHTML\" hx-push-url=\"true\" _=\"
 \">
-</div>
+</a> 
+<span class=\"
+\">X</span></div></div>
 <div id=\"open-notes\" class=\"flex w-[calc(100%-200px)]\">
 </div>
 <header class=\"p-2 flex\">

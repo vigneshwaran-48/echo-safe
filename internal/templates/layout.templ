@@ -24,12 +24,31 @@ templ head(title string) {
 templ OpenNoteBar(openNote *models.OpenNote) {
 	{{
 	activeClass := ""
+	closeButtonActiveClass := "hidden"
 	if openNote.Active {
 		activeClass = "bg-dark-hover"
+		closeButtonActiveClass = "inline-block"
 	}
 	}}
-	<div id={ fmt.Sprintf("open-tab-bar-%d", openNote.NoteId) } class={ fmt.Sprintf("p-2 flex-grow flex-shrink rounded hover:bg-dark-hover text-ellipsis min-w-[0px] basis-[0px] whitespace-nowrap overflow-hidden %s", activeClass) }>
-		{ openNote.Title }
+	<div
+		class={ fmt.Sprintf("p-2 cursor-pointer flex-grow flex-shrink rounded hover:bg-dark-hover hover:[&_.close-button]:inline-block text-ellipsis min-w-[0px] basis-[0px] whitespace-nowrap overflow-hidden %s", activeClass) }
+	>
+		<div class="flex ">
+			<a
+				id={ fmt.Sprintf("open-tab-bar-%d", openNote.NoteId) }
+				class="flex-grow flex-shrink text-ellipsis min-w-[0px] basis-[0px] whitespace-nowrap overflow-hidden"
+				hx-get={ fmt.Sprintf("/notes/%d", openNote.NoteId) }
+				hx-target="#main-content"
+				hx-swap="innerHTML"
+				hx-push-url="true"
+				_={ fmt.Sprintf("on htmx:afterOnLoad remove .bg-dark-hover .text-primary-text from .nav-link then add .bg-dark-hover .text-primary-text to #note-sidenav-%d", openNote.NoteId) }
+			>
+				{ openNote.Title }
+			</a>
+			<span
+				class={ fmt.Sprintf("close-button flex justify-center items-center %s", closeButtonActiveClass) }
+			>X</span>
+		</div>
 	</div>
 }
 
