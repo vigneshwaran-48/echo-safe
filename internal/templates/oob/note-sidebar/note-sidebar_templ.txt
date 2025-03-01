@@ -1,0 +1,2 @@
+<ul id=\"notes-sidebar\" hx-swap-oob=\"beforeend\">
+</ul>

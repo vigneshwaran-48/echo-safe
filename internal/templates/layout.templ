@@ -31,7 +31,7 @@ templ OpenNoteBar(openNote *models.OpenNote) {
 	}
 	}}
 	<div
-		class={ fmt.Sprintf("p-2 cursor-pointer flex-grow flex-shrink rounded hover:bg-dark-hover hover:[&_.close-button]:inline-block text-ellipsis min-w-[0px] basis-[0px] whitespace-nowrap overflow-hidden %s", activeClass) }
+		class={ fmt.Sprintf("p-2 mr-2 cursor-pointer flex-grow flex-shrink rounded hover:bg-dark-hover hover:[&_.close-button]:inline-block text-ellipsis max-w-[200px] min-w-[0px] basis-[0px] whitespace-nowrap overflow-hidden %s", activeClass) }
 	>
 		<div class="flex ">
 			<a

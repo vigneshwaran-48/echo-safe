@@ -175,7 +175,7 @@ func OpenNoteBar(openNote *models.OpenNote) templ.Component {
 			activeClass = "bg-dark-hover"
 			closeButtonActiveClass = "inline-block"
 		}
-		var templ_7745c5c3_Var11 = []any{fmt.Sprintf("p-2 cursor-pointer flex-grow flex-shrink rounded hover:bg-dark-hover hover:[&_.close-button]:inline-block text-ellipsis min-w-[0px] basis-[0px] whitespace-nowrap overflow-hidden %s", activeClass)}
+		var templ_7745c5c3_Var11 = []any{fmt.Sprintf("p-2 mr-2 cursor-pointer flex-grow flex-shrink rounded hover:bg-dark-hover hover:[&_.close-button]:inline-block text-ellipsis max-w-[200px] min-w-[0px] basis-[0px] whitespace-nowrap overflow-hidden %s", activeClass)}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var11...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
