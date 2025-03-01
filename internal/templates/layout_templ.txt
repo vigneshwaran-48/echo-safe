@@ -14,12 +14,13 @@
 \">
 </a> 
 <span class=\"
-\">X</span></div></div>
+\" hx-delete=\"
+\" hx-target=\"#main-content\" hx-swap=\"innerHTML\" _=\"on htmx:onremoveopennote log event\">X</span></div></div>
 <div id=\"open-notes\" class=\"flex w-[calc(100%-200px)]\">
 </div>
-<header class=\"p-2 flex\">
+<header class=\"p-2 flex h-[60px]\">
 </header>
 <body class=\"w-full h-full flex flex-col bg-light text-secondary-text\">
-<div class=\"flex w-full h-[calc(100%-40px)]\">
+<div class=\"flex w-full h-[calc(100%-60px)]\">
 <div class=\"flex flex-grow flex-col space-between w-full h-full\"><div class=\"w-full h-[calc(100%-40px)]\"><div id=\"main-content\" class=\"w-full h-full p-1\">
 </div></div></div></div></body>

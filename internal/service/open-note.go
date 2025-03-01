@@ -94,5 +94,19 @@ func (service *OpenNoteService) DeleteOpenNote(noteId int64) error {
 		log.Printf("Open note not exists for note %d", noteId)
 		return nil
 	}
-	return service.repository.DeleteByNoteId(openNote.NoteId)
+	err = service.repository.DeleteByNoteId(openNote.NoteId)
+	if err != nil {
+		return err
+	}
+	if !openNote.Active {
+		return nil
+	}
+	openNotes, err := service.GetAllOpenNotes()
+	if err != nil {
+		return err
+	}
+	if len(openNotes) > 0 {
+		return service.SetActive(openNotes[0].NoteId, true)
+	}
+	return nil
 }

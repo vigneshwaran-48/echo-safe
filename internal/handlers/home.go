@@ -40,6 +40,7 @@ func (handler *HomeHandler) Home(w http.ResponseWriter, r *http.Request) {
 	for _, openNote := range openNotes {
 		if openNote.Active {
 			activeOpenNote = openNote.NoteId
+      break
 		}
 	}
 	err = templates.Layout(index, "Echo Safe", notes, activeOpenNote, openNotes).Render(r.Context(), w)

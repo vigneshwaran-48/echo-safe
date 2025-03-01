@@ -8,9 +8,12 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/vigneshwaran-48/echo-safe/internal/models"
 	"github.com/vigneshwaran-48/echo-safe/internal/service"
 	"github.com/vigneshwaran-48/echo-safe/internal/templates"
+	"github.com/vigneshwaran-48/echo-safe/internal/templates/index"
 	notesidebar "github.com/vigneshwaran-48/echo-safe/internal/templates/oob/note-sidebar"
+	opennotes "github.com/vigneshwaran-48/echo-safe/internal/templates/oob/open-notes"
 	"github.com/vigneshwaran-48/echo-safe/internal/templates/pages"
 )
 
@@ -102,15 +105,10 @@ func (handler *NotesHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	openNotes, err := handler.openNotesService.GetAllOpenNotes()
+	openNotes, err := getOpenNotes(handler)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Internal Error", http.StatusInternalServerError)
 		return
-	}
-
-	err = fillNotesName(openNotes, handler.service)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
 	if IsHxRequest(r) {
@@ -129,6 +127,9 @@ func (handler *NotesHandler) GetNote(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	err = templates.Layout(pages.NotePage(note, nil), note.Title, notes, note.Id, openNotes).Render(r.Context(), w)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func (handler *NotesHandler) UpdateNote(w http.ResponseWriter, r *http.Request) {
@@ -162,4 +163,77 @@ func (handler *NotesHandler) DeleteNote(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+}
+
+func (handler *NotesHandler) DeleteOpenNote(w http.ResponseWriter, r *http.Request) {
+	noteId, err := strconv.Atoi(chi.URLParam(r, "id"))
+	if err != nil {
+		http.Error(w, "Id should be a number", http.StatusBadRequest)
+		return
+	}
+	err = handler.openNotesService.DeleteOpenNote(int64(noteId))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	openNotes, err := getOpenNotes(handler)
+	if err != nil {
+		http.Error(w, "Internal Error", http.StatusInternalServerError)
+		return
+	}
+	var activeNote int64
+	activeNote = 0
+	for _, openNote := range openNotes {
+		if openNote.Active {
+			activeNote = openNote.NoteId
+			break
+		}
+	}
+
+	if activeNote != 0 {
+		note, err := handler.service.GetById(activeNote)
+		if err != nil {
+			http.Error(w, "Internal Error", http.StatusInternalServerError)
+			return
+		}
+		w.Header().Add("HX-Push-Url", fmt.Sprintf("/notes/%d", activeNote))
+
+		err = pages.NotePage(note, openNotes).Render(r.Context(), w)
+		if err != nil {
+			http.Error(w, "Internal Error", http.StatusInternalServerError)
+			return
+		}
+	} else {
+		w.Header().Add("HX-Push-Url", "/")
+
+		err = index.Index().Render(r.Context(), w)
+		if err != nil {
+			http.Error(w, "Internal Error", http.StatusInternalServerError)
+		}
+		err = opennotes.OpenNotes(openNotes).Render(r.Context(), w)
+		if err != nil {
+			http.Error(w, "Internal Error", http.StatusInternalServerError)
+		}
+	}
+	notes, err := handler.service.List()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	err = notesidebar.Sidebar(notes, activeNote).Render(r.Context(), w)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func getOpenNotes(handler *NotesHandler) ([]models.OpenNote, error) {
+	openNotes, err := handler.openNotesService.GetAllOpenNotes()
+	if err != nil {
+		return nil, err
+	}
+
+	err = fillNotesName(openNotes, handler.service)
+	if err != nil {
+		return nil, err
+	}
+	return openNotes, nil
 }

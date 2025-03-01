@@ -47,6 +47,10 @@ templ OpenNoteBar(openNote *models.OpenNote) {
 			</a>
 			<span
 				class={ fmt.Sprintf("close-button flex justify-center items-center %s", closeButtonActiveClass) }
+				hx-delete={ fmt.Sprintf("/notes/%d/open", openNote.NoteId) }
+				hx-target="#main-content"
+				hx-swap="innerHTML"
+        _="on htmx:onremoveopennote log event"
 			>X</span>
 		</div>
 	</div>
@@ -61,7 +65,7 @@ templ openNotesTab(openNotes []models.OpenNote) {
 }
 
 templ header(openNotes []models.OpenNote) {
-	<header class="p-2 flex">
+	<header class="p-2 flex h-[60px]">
 		@sidebar.SideTopbar()
 		@openNotesTab(openNotes)
 	</header>
@@ -71,7 +75,7 @@ templ Layout(content templ.Component, title string, notes []models.Note, activeN
 	@head(title)
 	<body class="w-full h-full flex flex-col bg-light text-secondary-text">
 		@header(openNotes)
-		<div class="flex w-full h-[calc(100%-40px)]">
+		<div class="flex w-full h-[calc(100%-60px)]">
 			@sidebar.Sidebar(notes, activeNote)
 			<div class="flex flex-grow flex-col space-between w-full h-full">
 				<div class="w-full h-[calc(100%-40px)]">

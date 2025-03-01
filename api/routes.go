@@ -37,6 +37,7 @@ func SetupRouter(db *sql.DB, r chi.Router) http.Handler {
 			r.Get("/{id}", notesHandler.GetNote)
 			r.Patch("/{id}", notesHandler.UpdateNote)
 			r.Delete("/{id}", notesHandler.DeleteNote)
+			r.Delete("/{id}/open", notesHandler.DeleteOpenNote)
 		})
 	})
 
