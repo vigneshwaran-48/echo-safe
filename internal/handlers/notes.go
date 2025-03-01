@@ -152,6 +152,11 @@ func (handler *NotesHandler) DeleteNote(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, "Id should be a number", http.StatusBadRequest)
 		return
 	}
+	err = handler.openNotesService.DeleteOpenNote(int64(noteId))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 	err = handler.service.DeleteNote(int64(noteId))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

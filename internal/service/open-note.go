@@ -3,6 +3,7 @@ package service
 import (
 	"errors"
 	"fmt"
+	"log"
 
 	"github.com/vigneshwaran-48/echo-safe/internal/models"
 	"github.com/vigneshwaran-48/echo-safe/internal/repository"
@@ -82,4 +83,16 @@ func (service *OpenNoteService) GetAllOpenNotes() ([]models.OpenNote, error) {
 		return nil, err
 	}
 	return openNotes, nil
+}
+
+func (service *OpenNoteService) DeleteOpenNote(noteId int64) error {
+	openNote, err := service.repository.FindByNoteId(noteId)
+	if err != nil {
+		return err
+	}
+	if openNote == nil {
+		log.Printf("Open note not exists for note %d", noteId)
+		return nil
+	}
+	return service.repository.DeleteByNoteId(openNote.NoteId)
 }
