@@ -233,7 +233,7 @@ func SideTopbar() templ.Component {
 			templ_7745c5c3_Var12 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "<div class=\"flex items-center w-[200px]\"><span class=\"px-2 cursor-pointer\" id=\"sidebar-toggle\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "<div class=\"flex items-center w-[200px] border-r border-gray-700\"><span class=\"px-2 cursor-pointer\" id=\"sidebar-toggle\" _=\"on click toggle .w-\\[200px\\] on #sidebar\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -278,7 +278,7 @@ func Sidebar(notes []models.Note, activeNote int64) templ.Component {
 			templ_7745c5c3_Var13 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "<nav id=\"sidebar\" class=\"h-full bg-dark w-[200px] flex-shrink-0 flex flex-col space-between transition-all overflow-hidden duration-100\"><div class=\"w-full h-[calc(100%-50px)] border-t border-b border-r border-gray-700\"><ul id=\"notes-sidebar\" class=\"p-2 h-full overflow-y-scroll\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "<nav id=\"sidebar\" class=\"h-full bg-dark w-0 w-[200px] flex-shrink-0 flex flex-col space-between transition-all overflow-hidden duration-100\"><div class=\"w-full h-[calc(100%-50px)] border-b border-r border-gray-700\"><ul id=\"notes-sidebar\" class=\"p-2 h-full overflow-y-scroll\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

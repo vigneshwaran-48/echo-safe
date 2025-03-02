@@ -172,7 +172,7 @@ func OpenNoteBar(openNote *models.OpenNote) templ.Component {
 		activeClass := ""
 		closeButtonActiveClass := "hidden"
 		if openNote.Active {
-			activeClass = "bg-dark-hover"
+			activeClass = "bg-dark-hover text-primary-text"
 			closeButtonActiveClass = "inline-block"
 		}
 		var templ_7745c5c3_Var11 = []any{fmt.Sprintf("p-2 mr-2 cursor-pointer flex-grow flex-shrink rounded hover:bg-dark-hover hover:[&_.close-button]:inline-block text-ellipsis max-w-[200px] min-w-[0px] basis-[0px] whitespace-nowrap overflow-hidden %s", activeClass)}
@@ -348,7 +348,7 @@ func header(openNotes []models.OpenNote) templ.Component {
 			templ_7745c5c3_Var21 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "<header class=\"p-2 flex h-[60px]\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "<header class=\"flex h-[60px] border-b border-gray-700\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
