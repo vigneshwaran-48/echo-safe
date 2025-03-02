@@ -172,10 +172,10 @@ func OpenNoteBar(openNote *models.OpenNote) templ.Component {
 		activeClass := ""
 		closeButtonActiveClass := "hidden"
 		if openNote.Active {
-			activeClass = "bg-dark-hover"
+			activeClass = "bg-dark text-primary-text border-b border-b-white"
 			closeButtonActiveClass = "inline-block"
 		}
-		var templ_7745c5c3_Var11 = []any{fmt.Sprintf("p-2 mr-2 cursor-pointer flex-grow flex-shrink rounded hover:bg-dark-hover hover:[&_.close-button]:inline-block text-ellipsis max-w-[200px] min-w-[0px] basis-[0px] whitespace-nowrap overflow-hidden %s", activeClass)}
+		var templ_7745c5c3_Var11 = []any{fmt.Sprintf("p-2 cursor-pointer h-fit flex-grow border-b border-b-transparent flex-shrink hover:bg-dark-hover hover:[&_.close-button]:inline-block text-ellipsis max-w-[200px] min-w-[0px] basis-[0px] whitespace-nowrap overflow-hidden %s", activeClass)}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var11...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -309,7 +309,7 @@ func openNotesTab(openNotes []models.OpenNote) templ.Component {
 			templ_7745c5c3_Var20 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "<div id=\"open-notes\" class=\"flex w-[calc(100%-200px)]\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "<div id=\"open-notes\" class=\"flex items-end w-[calc(100%-200px)]\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -348,7 +348,7 @@ func header(openNotes []models.OpenNote) templ.Component {
 			templ_7745c5c3_Var21 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "<header class=\"p-2 flex h-[60px]\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "<header class=\"flex h-[50px] border-b border-gray-700\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -401,7 +401,7 @@ func Layout(content templ.Component, title string, notes []models.Note, activeNo
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 24, "<div class=\"flex w-full h-[calc(100%-60px)]\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 24, "<div class=\"flex w-full h-[calc(100%-50px)]\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

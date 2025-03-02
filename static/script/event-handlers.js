@@ -30,11 +30,6 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#note-context-menu-delete").dataset.id = navLink.dataset.id;
   }
 
-  document.getElementById("sidebar-toggle").addEventListener("click", function() {
-    document.getElementById("sidebar").classList.toggle("w-0");
-    document.getElementById("sidebar").classList.toggle("w-[250px]");
-  });
-
   document.querySelectorAll("editor > .note-content-input").forEach(element => {
     element.addEventListener("keyup", e => {
       const mdToHTMLContent = marked.parse(e.target.value);

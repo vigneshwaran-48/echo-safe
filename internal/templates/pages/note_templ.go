@@ -170,7 +170,7 @@ func NotePage(note *models.Note, openNotes []models.OpenNote) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if openNotes != nil {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "<div id=\"open-notes\" class=\"flex w-[calc(100%-200px)]\" hx-swap-oob=\"true\" hx-swap=\"outerHTML\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "<div id=\"open-notes\" class=\"flex items-end w-[calc(100%-200px)]\" hx-swap-oob=\"true\" hx-swap=\"outerHTML\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
