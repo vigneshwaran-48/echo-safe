@@ -16,11 +16,11 @@
 <span class=\"
 \" hx-delete=\"
 \" hx-target=\"#main-content\" hx-swap=\"innerHTML\">X</span></div></div>
-<div id=\"open-notes\" class=\"flex w-[calc(100%-200px)]\">
+<div id=\"open-notes\" class=\"flex items-end w-[calc(100%-200px)]\">
 </div>
-<header class=\"flex h-[60px] border-b border-gray-700\">
+<header class=\"flex h-[50px] border-b border-gray-700\">
 </header>
 <body class=\"w-full h-full flex flex-col bg-light text-secondary-text\">
-<div class=\"flex w-full h-[calc(100%-60px)]\">
+<div class=\"flex w-full h-[calc(100%-50px)]\">
 <div class=\"flex flex-grow flex-col space-between w-full h-full\"><div class=\"w-full h-[calc(100%-40px)]\"><div id=\"main-content\" class=\"w-full h-full p-1\">
 </div></div></div></div></body>

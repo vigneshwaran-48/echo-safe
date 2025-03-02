@@ -9,5 +9,5 @@
 </textarea></div><div id=\"
 \" class=\"preview hidden w-full max-w-[700px] h-full flex flex-col\"><div class=\"note-title py-2 text-4xl font-bold w-full break-all\">
 </div><div class=\"content w-full\"></div></div></div>
-<div id=\"open-notes\" class=\"flex w-[calc(100%-200px)]\" hx-swap-oob=\"true\" hx-swap=\"outerHTML\">
+<div id=\"open-notes\" class=\"flex items-end w-[calc(100%-200px)]\" hx-swap-oob=\"true\" hx-swap=\"outerHTML\">
 </div>

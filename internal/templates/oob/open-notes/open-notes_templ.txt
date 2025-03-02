@@ -1,2 +1,2 @@
-<div id=\"open-notes\" class=\"flex w-[calc(100%-200px)]\" hx-swap-oob=\"true\" hx-swap=\"outerHTML\">
+<div id=\"open-notes\" class=\"flex items-end w-[calc(100%-200px)]\" hx-swap-oob=\"true\" hx-swap=\"outerHTML\">
 </div>

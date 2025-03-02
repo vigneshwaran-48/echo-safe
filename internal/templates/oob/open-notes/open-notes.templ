@@ -4,7 +4,7 @@ import "github.com/vigneshwaran-48/echo-safe/internal/templates"
 import "github.com/vigneshwaran-48/echo-safe/internal/models"
 
 templ OpenNotes(openNotes []models.OpenNote) {
-	<div id="open-notes" class="flex w-[calc(100%-200px)]" hx-swap-oob="true" hx-swap="outerHTML">
+	<div id="open-notes" class="flex items-end w-[calc(100%-200px)]" hx-swap-oob="true" hx-swap="outerHTML">
 		for _, openNote := range openNotes {
 			@templates.OpenNoteBar(&openNote)
 		}
